@@ -1,0 +1,27 @@
+$primary-color: #22931f;
+$secondary-color: #2cb827;
+$shadow-color: #d9d9d9;
+$text-color: #304a30;
+$base-padding: 10px;
+
+$variables: (
+  secondary-color: $secondary-color,
+  primary-color: $primary-color,
+  shadow-color: $shadow-color,
+  text-color: $text-color,
+  base-padding: $base-padding,
+);
+
+@mixin map-to-string($map) {
+  @each $key, $value in $map {
+    @include rule($key, $value);
+  }
+}
+
+@mixin rule($key, $value) {
+  #{$key}: $value;
+}
+
+:export {
+  @include map-to-string($variables);
+}

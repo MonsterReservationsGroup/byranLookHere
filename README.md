@@ -8,7 +8,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng generate [component](component) component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
@@ -25,3 +25,34 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+### test-page UI:PAGE
+
+> this is a page that allows for testing of individual components
+
+### state UI:SERVICE
+
+sets/gets query parameters
+sets/gets guest fully or partially
+sets/gets available destinations
+sets/gets a selected destination
+sets/gets a selected date
+adds an upsell
+removes an upsell
+gets all upsells
+
+### crm UI:SERVICE
+
+get a guest based on hash
+set a guest based on the sale
+
+### nav-bar UI:COMPONENT
+
+monster logo on the left flat white
+like us on the right
+
+### button UI:DIRECTIVE
+rounded corners
+has an option to make bouncy
+has an option to make bold
+defaults to primary color, optional light, and inverted styles vial coloring property
