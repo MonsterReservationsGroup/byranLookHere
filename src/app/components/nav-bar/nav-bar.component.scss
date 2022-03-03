@@ -1,0 +1,31 @@
+@import "../../../vars";
+
+:host {
+  /*<--Position / Display-->*/
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: fit-content;
+
+  /*<--Margin / Padding / Border>*/
+  margin-bottom: 6px;
+  width: 100%;
+  min-height: 70px;
+  padding: $base-padding;
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+  background-color: $primary-color;
+  box-shadow: 0 0 3px 5px $shadow-color;
+}
+
+h3 {
+  color: #fff;
+}
+
+img {
+  width: 7vh;
+  margin: 0 2vw;
+}
