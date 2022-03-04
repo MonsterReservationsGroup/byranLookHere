@@ -1,14 +1,14 @@
 $primary-color: #22931f;
 $secondary-color: #2cb827;
 $shadow-color: #d9d9d9;
-$text-color: #304a30;
+$base-text-color: #6B7280;
 $base-padding: 10px;
 
 $variables: (
   secondary-color: $secondary-color,
   primary-color: $primary-color,
   shadow-color: $shadow-color,
-  text-color: $text-color,
+  base-text-color: $base-text-color,
   base-padding: $base-padding,
 );
 

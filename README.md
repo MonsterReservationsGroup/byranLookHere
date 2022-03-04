@@ -52,7 +52,44 @@ monster logo on the left flat white
 like us on the right
 
 ### button UI:DIRECTIVE
+
 rounded corners
 has an option to make bouncy
 has an option to make bold
 defaults to primary color, optional light, and inverted styles vial coloring property
+
+### timeline UI:SERVICE
+
+this service handles the flow of the app
+current index keeps track of the current page
+callback is a function that is called when the next method is called,
+if it returns false the goToNextRoute is not called
+goes to the next route
+goes to the previous route
+
+### help-button UI:COMPONENT
+
+only shown on screens smaller than 500px
+placed in lower left right hand corner of the screen
+scales periodically
+
+### image-offset-card UI:COMPONENT
+
+this component displays a small blurb along with a centered offset image giving a nice layering effect
+takes as input an imageUrl and a title
+takes the body as ng content
+
+### hero UI:COMPONENT
+
+this component describes the current page
+has a title input
+a catchphrase input
+takes body as ng content
+
+### image-card UI:COMPONENT
+this component is used to showcase information along with a nice picture relavent to the information
+takes an image url
+takes a title
+takes a ng content as description, p tag required
+takes a footer
+
