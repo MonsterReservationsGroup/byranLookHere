@@ -21,11 +21,53 @@
   box-shadow: 0 0 3px 5px $shadow-color;
 }
 
+button {
+  margin: 0 5px;
+}
+
 h3 {
   color: #fff;
 }
 
 img {
-  width: 7vh;
+  width: 5vh;
   margin: 0 2vw;
+}
+
+.leftGroup {
+  /*<--Position / Display-->*/
+  display: flex;
+  align-items: center;
+
+  /*<--Margin / Padding / Border>*/
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+}
+
+a {
+  /*<--Position / Display-->*/
+
+  /*<--Margin / Padding / Border>*/
+  margin: 0 10px;
+
+  /*<--Fonts-->*/
+  font-size: 0.6em;
+
+  /*<--Colors-->*/
+  color: #fff;
+  text-decoration: none;
+  transition: 0.2s ease-out;
+}
+
+a:hover {
+  font-size: 20px;
+  transition: 0.2s ease-out;
+}
+
+@media (max-width: 500px) {
+  .desktopOnly {
+    display: none;
+  }
 }
