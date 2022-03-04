@@ -1,0 +1,73 @@
+@import "../../../vars";
+
+:host {
+  /*<--Position / Display-->*/
+  display: block;
+  position: absolute;
+  width: 300px;
+  height: 175px;
+  color: $base-text-color;
+
+  /*<--Margin / Padding / Border>*/
+  border-radius: 7px;
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+img {
+  /*<--Position / Display-->*/
+  display: block;
+  position: relative;
+  top: -25%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  /*<--Margin / Padding / Border>*/
+  width: 30%;
+  border-radius: 7px;
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+}
+
+.textBox {
+  /*<--Position / Display-->*/
+  transform: translateY(-20px);
+
+  /*<--Margin / Padding / Border>*/
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+
+  &__title {
+    /*<--Position / Display-->*/
+    display: block;
+    width: fit-content;
+
+    /*<--Margin / Padding / Border>*/
+    margin: 0 auto;
+
+    /*<--Fonts-->*/
+
+    /*<--Colors-->*/
+    color: black;
+  }
+
+  &__content {
+    /*<--Position / Display-->*/
+
+    /*<--Margin / Padding / Border>*/
+    margin-top: 20px;
+
+    /*<--Fonts-->*/
+    text-align: center;
+    font-size: 12px;
+
+    /*<--Colors-->*/
+  }
+}
