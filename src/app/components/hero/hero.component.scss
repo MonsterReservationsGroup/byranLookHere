@@ -1,0 +1,51 @@
+@import "../../../vars";
+
+:host {
+  /*<--Position / Display-->*/
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+
+  /*<--Margin / Padding / Border>*/
+  margin: 0 auto;
+
+  /*<--Fonts-->*/
+  text-align: center;
+  line-height: 2;
+
+  /*<--Colors-->*/
+  color: $base-text-color;
+}
+
+h6 {
+  /*<--Position / Display-->*/
+  width: fit-content;
+
+  /*<--Margin / Padding / Border>*/
+
+  /*<--Fonts-->*/
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+
+  /*<--Colors-->*/
+
+  color: $primary-color;
+}
+
+h1 {
+  /*<--Position / Display-->*/
+  display: block;
+  width: fit-content;
+
+  /*<--Margin / Padding / Border>*/
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+  color: black;
+}
