@@ -1,0 +1,67 @@
+:host {
+  /*<--Position / Display-->*/
+  display: none;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+
+  /*<--Margin / Padding / Border>*/
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+}
+
+img {
+  /*<--Position / Display-->*/
+  width: 100%;
+
+  /*<--Margin / Padding / Border>*/
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+}
+
+@media (max-width: 500px) {
+  :host {
+    display: block;
+  }
+}
+
+@keyframes flip {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.5, 1.5);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-15px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+:host.shake {
+  animation: flip 2s ease both;
+  transform: translate3d(0, 0, 0);
+}
