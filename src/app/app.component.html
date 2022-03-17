@@ -1,2 +1,5 @@
-<rafa-nav-bar></rafa-nav-bar> <router-outlet></router-outlet
-><rafa-help-button></rafa-help-button>
+<rafa-nav-bar></rafa-nav-bar>
+<div [@slide]="getState(o)">
+  <router-outlet #o="outlet"></router-outlet
+  ><rafa-help-button (click)="fireHelpModal()"></rafa-help-button>
+</div>

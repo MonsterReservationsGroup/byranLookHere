@@ -47,6 +47,10 @@ export class ButtonDirective implements OnChanges {
     this.ref.nativeElement.style.color = '#fff';
     this.ref.nativeElement.style.fontWeight = 'bold';
     this.ref.nativeElement.style.backgroundColor = styleVars['primary-color'];
+    const keyframeTag = document.createElement('style');
+    keyframeTag.innerHTML = bounce;
+    this.ref.nativeElement.appendChild(keyframeTag);
+    this.ref.nativeElement.classList.add('button');
   }
 
   private makeInvertedStyle() {
@@ -60,9 +64,6 @@ export class ButtonDirective implements OnChanges {
   }
 
   private makeBouncy() {
-    const keyframeTag = document.createElement('style');
-    keyframeTag.innerHTML = bounce;
-    this.ref.nativeElement.appendChild(keyframeTag);
     this.ref.nativeElement.classList.add('bouncy');
   }
 }

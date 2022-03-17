@@ -1,0 +1,145 @@
+@import "../../../vars";
+:host {
+  /*<--Position / Display-->*/
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  gap: 5px;
+
+  /*<--Margin / Padding / Border>*/
+  //box-shadow: 0 0 5px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+}
+
+.buttonContainer {
+  /*<--Position / Display-->*/
+  display: flex;
+  margin-top: 15px;
+  width: fit-content;
+  gap: 20px;
+
+  /*<--Margin / Padding / Border>*/
+  border-radius: 10px;
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+  &__button {
+    /*<--Position / Display-->*/
+    display: flex;
+    align-items: cener;
+    width: fit-content;
+    justify-content: center;
+    transform: translateY(0px);
+    transition: 0.3s ease-in-out;
+
+    /*<--Margin / Padding / Border>*/
+    border-radius: 50%;
+    box-shadow: 0 0 5px 4px rgba(0, 0, 0, 0.05);
+    padding: 5px;
+
+    /*<--Fonts-->*/
+
+    /*<--Colors-->*/
+
+    &--icon {
+      /*<--Position / Display-->*/
+
+      /*<--Margin / Padding / Border>*/
+      height: 50px;
+
+      /*<--Fonts-->*/
+
+      /*<--Colors-->*/
+    }
+  }
+}
+
+.selected {
+  transform: translateY(-10px);
+  box-shadow: 0 0 5px 4px rgba(0, 0, 0, 0.05),
+    0px 10px 1px 1px rgba(0, 0, 0, 0.1);
+
+  transition: 0.3s ease-in-out;
+}
+
+.drawText {
+  /*<--Position / Display-->*/
+
+  /*<--Margin / Padding / Border>*/
+  height: 20px;
+
+  /*<--Fonts-->*/
+  font-size: clamp(10px, 3.2vw, 18px);
+  text-align: center;
+  font-weight: 500;
+
+  /*<--Colors-->*/
+  &__letter {
+    /*<--Position / Display-->*/
+    display: inline;
+    position: relative;
+
+    /*<--Margin / Padding / Border>*/
+
+    /*<--Fonts-->*/
+
+    /*<--Colors-->*/
+    color: black;
+    animation: explode 0.2s ease-in-out;
+  }
+
+  &__letter:nth-last-child(1) {
+    /*<--Position / Display-->*/
+
+    /*<--Margin / Padding / Border>*/
+
+    /*<--Fonts-->*/
+
+    /*<--Colors-->*/
+
+    transition: 0.1s ease-in-out;
+  }
+}
+
+@media (max-width: 555px) {
+  .buttonContainer {
+    /*<--Position / Display-->*/
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 250px;
+
+    /*<--Margin / Padding / Border>*/
+    padding: 0;
+    padding-top: 10px;
+
+    /*<--Fonts-->*/
+
+    /*<--Colors-->*/
+  }
+}
+
+@keyframes explode {
+  0% {
+    color: $secondary-color;
+  }
+  25% {
+    opacity: 0.5;
+    color: $primary-color;
+  }
+  50% {
+    transform: translateX(-3px);
+  }
+  75% {
+    opacity: 0.5;
+    transform: translateX(0);
+  }
+  100% {
+    color: $secondary-color;
+  }
+}

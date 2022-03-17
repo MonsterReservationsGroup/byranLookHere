@@ -1,0 +1,74 @@
+@import "../../../vars";
+
+.field {
+  /*<--Position / Display-->*/
+  position: relative;
+  margin-top: 20px;
+
+  /*<--Margin / Padding / Border>*/
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+
+  &__label {
+    /*<--Position / Display-->*/
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+
+    /*<--Margin / Padding / Border>*/
+
+    /*<--Fonts-->*/
+    font-size: 20px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.5);
+
+    /*<--Colors-->*/
+
+    transition: all 0.2s ease-in-out;
+
+    &--active {
+      @include focused;
+      /*<--Position / Display-->*/
+
+      /*<--Margin / Padding / Border>*/
+
+      /*<--Fonts-->*/
+
+      /*<--Colors-->*/
+    }
+  }
+
+  &__input {
+    /*<--Position / Display-->*/
+
+    /*<--Margin / Padding / Border>*/
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+
+    /*<--Fonts-->*/
+    font-size: 20px;
+    font-weight: 600;
+
+    /*<--Colors-->*/
+    color: rgba(0, 0, 0, 0.5);
+    transition: 0.5s ease-in-out;
+
+    &:focus {
+      /*<--Position / Display-->*/
+
+      /*<--Margin / Padding / Border>*/
+      border: 2px solid $primary-color;
+      outline: none;
+      box-shadow: none;
+
+      /*<--Fonts-->*/
+
+      /*<--Colors-->*/
+      transition: 0.5s ease-in-out;
+    }
+  }
+}

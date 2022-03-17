@@ -13,6 +13,8 @@ services.fixNeverReadError(interfaces);
   adds an upsell
   removes an upsell
   gets all upsells
+  generates a cart
+  removes an element from the cart
 
 ********************/
 
@@ -26,8 +28,18 @@ export class StateService {
   private _selectedDestination: interfaces.Destination_ = null as any;
   private _selectedDate: Date = null as any;
   private _upsells: interfaces.Upsell_[] = [];
+  private _creditCardToken: interfaces.TokenTypeD = null as any;
+  private _cart: Array<interfaces.CartItem_> = [];
 
   constructor() {}
+
+  set creditCardToken(token: interfaces.TokenTypeD) {
+    this._creditCardToken = token;
+  }
+
+  get creditCardToken(): interfaces.TokenTypeD {
+    return this._creditCardToken;
+  }
 
   set queryParams(queryParams: interfaces.QueryParams_) {
     this._queryParams = queryParams;
@@ -81,5 +93,36 @@ export class StateService {
     this._upsells = this._upsells.filter(
       (upsell_) => JSON.stringify(upsell_) !== JSON.stringify(upsell)
     );
+  }
+
+  generateCart() {
+    const whiteGlove: interfaces.CartItem_ = {
+      id: '1',
+      description:
+        'Now offering a peace of mind option! We know life happens, so in order to protect you from rescheduling fees, we created White Glove Service! This service protects your deposit, allows you to reschedule dates, and you also receive a Travel Guide Ebook all about the destination you are traveling too!',
+      icon: '../../../assets/cart/flip-flops.png',
+      isRemovable: true,
+      name: 'White Glove Service',
+      price: 99,
+    };
+    const destination: interfaces.CartItem_ = {
+      id: '2',
+      description:
+        'The $150 refundable deposit ensures your accomodations are secured.',
+      icon: '../../../assets/cart/vacations.svg',
+      isRemovable: false,
+      name: `Activation! ${this.selectedDestination?.destName || 'lorum'}`,
+      price: 150,
+    };
+    this._cart = [destination, whiteGlove];
+    return this._cart;
+  }
+
+  get cart() {
+    return this._cart;
+  }
+
+  removeFromCart(id: string) {
+    this._cart = this._cart.filter((item) => item.id !== id);
   }
 }

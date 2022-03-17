@@ -1,0 +1,13 @@
+<div class="drawText">
+  <p class="drawText__letter" *ngFor="let letter of blurb">{{letter}}</p>
+</div>
+<section class="buttonContainer">
+  <div
+    (click)="selectItem(i)"
+    class="buttonContainer__button"
+    [class.selected]="maritalButton.selected"
+    *ngFor="let maritalButton of maritalButtons; let i = index"
+  >
+    <img class="buttonContainer__button--icon" [src]="baseIcon + i + '.svg'" />
+  </div>
+</section>

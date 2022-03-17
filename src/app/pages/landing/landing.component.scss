@@ -1,0 +1,37 @@
+@import "../../../vars";
+
+:host {
+  /*<--Position / Display-->*/
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+
+  /*<--Margin / Padding / Border>*/
+  padding: 20px;
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+}
+
+.image-card-container {
+  /*<--Position / Display-->*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: fit-content;
+
+  /*<--Margin / Padding / Border>*/
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+}
+
+@include tablet {
+  .image-card-container {
+    flex-direction: column;
+    gap: 75px;
+  }
+}

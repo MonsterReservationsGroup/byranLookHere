@@ -1,0 +1,23 @@
+<rafa-hero title="Loading... Dream Vacation"
+  ><p class="heroContent">
+    You’re so close to embarking on an amazing adventure. Continue with the
+    booking process by answering a few quick questions below!
+  </p></rafa-hero
+>
+<form [formGroup]="form" class="form">
+  <rafa-marital-select formControlName="maritalStatus"></rafa-marital-select>
+  <rafa-input formControlName="name" label="Name"></rafa-input>
+  <rafa-input
+    *ngIf="this.form.get('maritalStatus')!.value && !form.get('maritalStatus')!.value?.includes('Single')"
+    formControlName="spouseName"
+    label="Spouse Name"
+    class="growIn"
+  ></rafa-input>
+  <rafa-date-picker
+    class="form__date-picker"
+    label="Date of Birth"
+    formControlName="dob"
+  ></rafa-date-picker>
+  <rafa-input formControlName="zipCode" label="Zip Code"></rafa-input>
+  <rafa-input formControlName="income" label="Income"></rafa-input>
+</form>

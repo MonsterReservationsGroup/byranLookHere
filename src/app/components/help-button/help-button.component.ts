@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef } from '@angular/core';
 import * as interfaces from '../../../../interfaces.d';
 import * as services from '../../services';
 services.fixNeverReadError(interfaces);
@@ -16,21 +16,23 @@ scales periodically
   templateUrl: './help-button.component.html',
   styleUrls: ['./help-button.component.scss'],
 })
-export class HelpButtonComponent implements OnInit {
+export class HelpButtonComponent implements AfterViewInit {
   timer: ReturnType<typeof setTimeout> = null as any;
 
   constructor(private ref: ElementRef) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit() {
     this._manageShake();
   }
 
   private _manageShake() {
-    const time = 5000;
+    const time = 4000;
+    this.ref.nativeElement.classList.add('call-attention');
     this.timer = setInterval(() => {
       this.ref.nativeElement.classList.add('shake');
       setTimeout(() => {
         this.ref.nativeElement.classList.remove('shake');
+        this.ref.nativeElement.classList.remove('call-attention');
       }, time / 2);
     }, time);
   }

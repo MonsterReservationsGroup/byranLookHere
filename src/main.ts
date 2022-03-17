@@ -10,3 +10,8 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
+
+const collectJsTag = document.createElement('script')
+collectJsTag.setAttribute('src', 'https://secure.networkmerchants.com/token/Collect.js')
+collectJsTag.setAttribute('data-tokenization-key', environment.merchantKey)
+document.body.append(collectJsTag)

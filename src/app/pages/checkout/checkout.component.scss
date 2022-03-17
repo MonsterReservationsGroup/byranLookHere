@@ -1,0 +1,27 @@
+:host {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  padding: 5vh;
+
+  /* Font, Background, Foreground, Color, Animation */
+}
+
+.checkoutWrapper {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  display: flex;
+  flex-direction: column;
+  width: 95vw;
+  max-width: 600px;
+  align-items: center;
+  gap: 2vh;
+
+  /* Font, Background, Foreground, Color, Animation */
+}
+
+button {
+  width: 100%;
+}

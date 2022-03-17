@@ -1,0 +1,32 @@
+@import "../../../vars";
+
+.rafa-input {
+  /*<--Position / Display-->*/
+
+  /*<--Margin / Padding / Border>*/
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 10px;
+
+  /*<--Fonts-->*/
+  font-size: 20px;
+  font-weight: 600;
+
+  /*<--Colors-->*/
+  color: rgba(0, 0, 0, 0.5);
+  transition: 0.5s ease-in-out;
+
+  &:focus {
+    /*<--Position / Display-->*/
+
+    /*<--Margin / Padding / Border>*/
+    border: 2px solid $primary-color;
+    outline: none;
+    box-shadow: none;
+
+    /*<--Fonts-->*/
+
+    /*<--Colors-->*/
+    transition: 0.5s ease-in-out;
+  }
+}

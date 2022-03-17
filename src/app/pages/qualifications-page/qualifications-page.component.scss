@@ -1,0 +1,59 @@
+@import "../../../vars";
+:host {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  padding: 5vh 2vw;
+
+  /* Font, Background, Foreground, Color, Animation */
+}
+
+.growIn {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  display: flex;
+
+  /* Font, Background, Foreground, Color, Animation */
+  animation: growIn 1s ease-in-out;
+}
+
+.form {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3vh;
+  border-radius: 8px;
+  padding: clamp(10px, 5%, 50px);
+
+  /* Font, Background, Foreground, Color, Animation */
+  box-shadow: 0 0 5px 4px rgba(0, 0, 0, 0.05);
+
+  &__date-picker {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+
+    /* Font, Background, Foreground, Color, Animation */
+  }
+}
+
+rafa-date-picker {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  margin-top: 15px;
+
+  /* Font, Background, Foreground, Color, Animation */
+}
+
+@keyframes growIn {
+  0% {
+    max-height: 0;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    max-height: 300px;
+  }
+}

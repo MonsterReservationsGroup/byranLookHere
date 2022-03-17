@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as interfaces from '../../../../interfaces.d';
-import * as services from '../../services';
-services.fixNeverReadError(interfaces);
+import { TimelineService } from '../../services';
 
 /*****Description*****
 
@@ -34,7 +33,12 @@ export class NavBarComponent implements OnInit {
       url: 'https://monsterrg.com/blog/',
     },
   ];
-  constructor() {}
+  isNotLast = true;
+  constructor(public timeline: TimelineService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.timeline.isNotLast().subscribe((isNotLast) => {
+      this.isNotLast = isNotLast;
+    });
+  }
 }

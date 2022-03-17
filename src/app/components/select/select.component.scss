@@ -1,0 +1,119 @@
+.select {
+  position: relative;
+  /*<--Position / Display-->*/
+
+  /*<--Margin / Padding / Border>*/
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+
+  &__list {
+    /*<--Position / Display-->*/
+
+    /*<--Margin / Padding / Border>*/
+    border-radius: 7px;
+    width: 100%;
+    position: absolute;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: scroll;
+    max-height: 300px;
+    margin: 0 auto;
+    z-index: 999;
+
+    /*<--Fonts-->*/
+    text-align: center;
+
+    /*<--Colors-->*/
+    background-color: #fff;
+
+    // &:before {
+    //   border: 1px dashed;
+    //   content: " ";
+
+    //   /*<--Position / Display-->*/
+    //   position: absolute;
+    //   top: -10px;
+    //   width: 0;
+    //   height: 0;
+    //   border-top: 50px solid transparent;
+    //   border-right: 100px solid red;
+    //   border-bottom: 50px solid transparent;
+
+    //   /*<--Margin / Padding / Border>*/
+
+    //   /*<--Fonts-->*/
+
+    //   /*<--Colors-->*/
+    // }
+  }
+
+  // &__list:not(:last-child) {
+  //   border: 1px dashed;
+  // }
+}
+
+.listItem {
+  /*<--Position / Display-->*/
+
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+
+  /*<--Margin / Padding / Border>*/
+  border-radius: 7px;
+  padding: 10px;
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+
+  &__icon {
+    /*<--Position / Display-->*/
+    height: 25px;
+
+    /*<--Margin / Padding / Border>*/
+    margin-right: auto;
+
+    /*<--Fonts-->*/
+
+    /*<--Colors-->*/
+  }
+  &__text {
+    /*<--Position / Display-->*/
+
+    /*<--Margin / Padding / Border>*/
+
+    /*<--Fonts-->*/
+    font-weight: 500;
+
+    /*<--Colors-->*/
+  }
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+
+// .listItem:not(:last-child) {
+//   /*<--Position / Display-->*/
+//   position: absolute;
+//   width: 70%;
+//   content: " ";
+
+//   /*<--Margin / Padding / Border>*/
+//   bottom: 0;
+//   left: 15%;
+//   margin: 0 auto;
+//   border-bottom: 1px solid rgba(0, 0, 0, 1);
+
+//   /*<--Fonts-->*/
+
+//   /*<--Colors-->*/
+// }
+.button {
+  width: 100%;
+}

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "selfserviceactivations": {
+      "hosting": {
+        "Ssa": [
+          "ssa11607"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "selfserviceactivations"
+  }
+}

@@ -1,0 +1,46 @@
+<label
+  [class.hidden]="headless"
+  (click)="inputField.focus()"
+  class="label"
+  [class.label--active]="_outputDate || isSelecting"
+  [for]="label"
+  >{{label}}</label
+>
+<input
+  [class.hidden]="headless"
+  #inputField
+  [name]="label"
+  [value]="_outputDate?.toString() | dateFormatter
+  "
+  (focus)="isSelecting = true"
+  class="display"
+/>
+<div *ngIf="reset" class="calendar" [class.calendar--active]="isSelecting">
+  <rafa-select
+    placeholder="Month"
+    [listItems]="months"
+    (onSelect)="attemptSelect($event, 'selectedMonth')"
+    class="calendar__month"
+  ></rafa-select>
+  <rafa-select
+    *ngIf="days"
+    [listItems]="days"
+    (onSelect)="attemptSelect($event, 'selectedDay')"
+    placeholder="Day"
+    class="calendar__day scaleIn"
+  ></rafa-select>
+  <rafa-select
+    (onSelect)="attemptSelect($event, 'selectedYear')"
+    [listItems]="years"
+    placeholder="Year"
+    class="calendar__year"
+  ></rafa-select>
+</div>
+<div [class.headless-label--active]="isSelecting" class="headless-label">
+  {{label}}
+</div>
+<div
+  class="mask"
+  [class.mask--active]="isSelecting"
+  (click)="isSelecting = false"
+></div>

@@ -74,4 +74,30 @@ describe('StateService', () => {
     expect(service.upsells).not.toContain(testUpsell);
     expect(service.upsells).toHaveLength(0);
   });
+
+  it('Should set and get the credit card token', () => {
+    const testToken = '123' as any;
+    service.creditCardToken = testToken;
+    expect(service.creditCardToken).toBe(testToken);
+  });
+
+  it('Should generate a shopping cart based on the selected destination and get the cart', () => {
+    const testDestination = {
+      destName: 'miami',
+      description: 'hello world',
+    } as any;
+    service.selectedDestination = testDestination;
+    service.generateCart();
+    const [destination, whiteGlove] = service.cart;
+    expect(service.cart).toHaveLength(2);
+    expect(destination.name).toContain(testDestination.destName);
+    expect(destination.description).toBe(testDestination.description);
+    expect(whiteGlove.name).toBe('White Glove Service');
+  });
+
+  it('Should remove an item from the cart', () => {
+    service.generateCart();
+    service.removeFromCart('1');
+    expect(service.cart).toHaveLength(1);
+  });
 });

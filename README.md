@@ -87,9 +87,103 @@ a catchphrase input
 takes body as ng content
 
 ### image-card UI:COMPONENT
+
 this component is used to showcase information along with a nice picture relavent to the information
 takes an image url
 takes a title
 takes a ng content as description, p tag required
 takes a footer
 
+### credit-card-panel UI:COMPONENT
+
+displays the type as an icon
+displays the last 4
+displays the expiration
+has a button to add / edit the credit card
+defaults to 'add card button'
+
+### nmi-collect UI:SERVICE
+
+private adds collect to the window object
+public collects credit card info and returns token as a promise
+private configures collect js to charge the card
+
+### shopping-cart UI:COMPONENT
+
+displays an array of items
+totals the cost of all items
+displays a round picture of item
+allows removal of items
+allows back button
+
+### cart-total UI:PIPE
+
+adds up the total of all the items in the cart
+
+### smooth-height UI:DIRECTIVE
+
+this directive makes the component adjust to the hight of the content smoothly
+
+### smooth-height UI:COMPONENT
+
+this component changes the height of the container smoothly when an element is removed
+
+### qualifications-form UI:COMPONENT
+
+this component allows us to give the guest the ability to input / edit their:
+marital status,
+date of birth,
+party size,
+income,
+
+### marital-select UI:COMPONENT
+
+this component allows you to select from:
+married, single, co-hab, married cohab males, married cohab females
+
+### mask UI:DIRECTIVE
+
+makes an input group coerce the into a given mask \* is the wild card character ex:
+(\*\*\*) \*\*\*-\*\*\*\*
+given the input 4323332222 will give the output
+(423) 333-2222
+
+### select UI:COMPONENT
+
+ This component acts as a styled select component.
+you can pass an array of values: [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]
+or you can pass values and a set of icons: [{value: &#x27;a&#x27;, icon: &#x27;a&#x27;}, {value: &#x27;b&#x27;, icon: &#x27;b&#x27;}, {value: &#x27;c&#x27;, icon: &#x27;c&#x27;}]
+
+
+### matts-test-page UI:PAGE 
+>
+### landing UI:PAGE 
+>
+
+### qualifications-page UI:PAGE 
+>This page allows the guest to view and correct their data
+### input UI:DIRECTIVE
+
+ styles the input according to rafas theme
+
+### input UI:COMPONENT
+
+ this component puts together an input and an optional label
+
+### date-picker UI:COMPONENT
+
+ three selects, month day year
+day is disabled if no month
+when month is selected it generates all days for that month
+outputs a standard javascript date object
+
+
+
+### destinations-page UI:PAGE 
+> this allows the guest to select a destination
+### checkout UI:PAGE 
+>this page allows the guest to pay
+
+### date-formatter UI:PIPE
+
+ format the date using date fns 

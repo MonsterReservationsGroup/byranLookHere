@@ -1,0 +1,179 @@
+@import "../../../vars";
+:host {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  position: relative;
+
+  /* Font, Background, Foreground, Color, Animation */
+  /*<--Position / Display-->*/
+
+  /*<--Margin / Padding / Border>*/
+  // display: flex;
+  // flex-direction: column;
+  // padding: 20px;
+  // padding-top: 5px;
+  // border-radius: 8px;
+  // max-width: 400px;
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+  background-color: transparent;
+}
+
+.display {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 10px;
+
+  /* Font, Background, Foreground, Color, Animation */
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.5);
+
+  &:focus {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    border: 2px solid $primary-color;
+    outline: none;
+    box-shadow: none;
+
+    /* Font, Background, Foreground, Color, Animation */
+  }
+}
+.mask {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  /* Font, Background, Foreground, Color, Animation */
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.mask--active {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+
+  /* Font, Background, Foreground, Color, Animation */
+  animation: active 0.3s ease-in-out forwards;
+}
+
+@keyframes active {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.calendar {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  position: fixed;
+  top: 50%;
+  left: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  align-items: center;
+  gap: 20px;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+
+  /* Font, Background, Foreground, Color, Animation */
+  background-color: #fff;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+
+  &--active {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    left: 50%;
+    z-index: 2;
+
+    /* Font, Background, Foreground, Color, Animation */
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+rafa-select {
+  width: max(80px, 3vw);
+}
+
+.scaleIn {
+  animation: scaleIn 0.3s cubic-bezier(0.4, -0.5, 0.6, 1.5);
+}
+
+.label {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+
+  /* Font, Background, Foreground, Color, Animation */
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.5);
+
+  &--active {
+    @include focused;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  to {
+    opacity: 1;
+    width: max(80px, 3vw);
+  }
+}
+
+h4 {
+  /*<--Position / Display-->*/
+
+  /*<--Margin / Padding / Border>*/
+
+  /*<--Fonts-->*/
+  font-weight: 500;
+
+  /*<--Colors-->*/
+}
+
+.hidden {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  display: none;
+
+  /* Font, Background, Foreground, Color, Animation */
+}
+.headless-label {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  display: none;
+  position: fixed;
+  z-index: 2;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  /* Font, Background, Foreground, Color, Animation */
+  font-size: 40px;
+  font-weight: 600;
+  text-align: center;
+  opacity: 0;
+  color: white;
+  &--active {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    display: block;
+    width: 100%;
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+  }
+}

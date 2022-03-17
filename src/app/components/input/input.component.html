@@ -1,0 +1,18 @@
+<div class="field">
+  <label
+    [for]="id"
+    (click)="inputField.focus()"
+    [class.field__label--active]="value || focused"
+    class="field__label"
+    >{{label}}</label
+  >
+  <input
+    #inputField
+    [name]="id"
+    (input)="setValue(inputField.value)"
+    (focus)="focused = true"
+    (blur)="focused = false"
+    type="text"
+    class="field__input"
+  />
+</div>

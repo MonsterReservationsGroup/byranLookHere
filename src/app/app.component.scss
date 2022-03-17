@@ -1,0 +1,31 @@
+.router-wrapper {
+  /*<--Position / Display-->*/
+  position: relative;
+  overflow: scroll;
+  width: 100vw;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+
+  /*<--Margin / Padding / Border>*/
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+}
+
+:host {
+  /*<--Position / Display-->*/
+  top: 0;
+  left: 0;
+  display: block;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+
+  /*<--Margin / Padding / Border>*/
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+  background-color: #fff;
+}

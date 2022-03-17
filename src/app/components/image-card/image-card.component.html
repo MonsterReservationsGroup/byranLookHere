@@ -1,7 +1,8 @@
 <img [src]="imageUrl" />
-
 <div class="textContent">
-  <h1>{{title}}</h1>
-  <ng-content></ng-content>
-  <strong>{{footer}}</strong>
+  <h1 class="textContent__title">{{title}}</h1>
+  <div class="textContent__body">
+    <ng-content></ng-content>
+  </div>
+  <strong class="textContent__footer">{{footer}}</strong>
 </div>

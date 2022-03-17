@@ -1,0 +1,27 @@
+<ng-template #listItemTemplate let-items>
+  <div class="listItem" *ngFor="let item of items" (click)="select(item)">
+    <img
+      onerror="this.parentNode.removeChild(this)"
+      [src]="item.icon || ''"
+      class="listItem__icon"
+    />
+    <p [class.fit]="item.isDisabled" class="listItem__text">
+      {{item.value || item}}
+    </p>
+  </div>
+</ng-template>
+
+<div class="select">
+  <button class="select__button" (click)="toggle()" rafaButton>
+    {{selection}}
+  </button>
+  <div
+    *ngIf="open && listItems && listItems[0]"
+    class="select__list"
+    @growShrink
+  >
+    <ng-container
+      *ngTemplateOutlet="listItemTemplate; context: { $implicit: listItems } "
+    ></ng-container>
+  </div>
+</div>

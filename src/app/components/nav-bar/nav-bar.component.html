@@ -4,6 +4,12 @@
 </div>
 
 <div class="desktopOnly">
-  <button [rafaButton]="{coloring: 'light', bouncy: true}">Next!</button>
+  <button
+    *ngIf="isNotLast"
+    (click)="timeline.next()"
+    [rafaButton]="{coloring: 'light', bouncy: true}"
+  >
+    Next!
+  </button>
   <button [rafaButton]="{coloring: 'inverted'}">Like Us</button>
 </div>

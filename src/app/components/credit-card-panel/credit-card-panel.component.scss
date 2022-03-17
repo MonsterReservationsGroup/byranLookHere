@@ -1,0 +1,111 @@
+@import "../../../vars";
+$base-font-size: 1.5vw;
+
+:host {
+  /*<--Position / Display-->*/
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+
+  /*<--Margin / Padding / Border>*/
+  padding: 29px;
+  margin: 0 auto;
+  padding-top: 0;
+  border-radius: 7px;
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 375px) {
+  .well {
+    flex-direction: column;
+
+    &__details {
+      text-align: center;
+    }
+  }
+}
+
+.well {
+  /*<--Position / Display-->*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /*<--Margin / Padding / Border>*/
+  padding: 0.9em;
+  border-radius: 7px;
+  gap: 0.9em;
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+  background-color: #fff;
+
+  &__details {
+    /*<--Position / Display-->*/
+    display: flex;
+    flex-direction: column;
+    gap: 0.01em;
+
+    /*<--Margin / Padding / Border>*/
+
+    /*<--Fonts-->*/
+
+    /*<--Colors-->*/
+
+    &--main {
+      /*<--Position / Display-->*/
+
+      /*<--Margin / Padding / Border>*/
+
+      /*<--Fonts-->*/
+      font-size: $base-font-size;
+
+      /*<--Colors-->*/
+      color: black;
+    }
+
+    &--meta {
+      /*<--Position / Display-->*/
+
+      /*<--Margin / Padding / Border>*/
+
+      /*<--Fonts-->*/
+      font-size: $base-font-size;
+
+      /*<--Colors-->*/
+      color: $base-text-color;
+    }
+  }
+}
+
+img {
+  /*<--Position / Display-->*/
+  height: 50px;
+  width: 50px;
+  display: block;
+
+  /*<--Margin / Padding / Border>*/
+
+  /*<--Fonts-->*/
+
+  /*<--Colors-->*/
+}
+
+h2 {
+  /*<--Position / Display-->*/
+
+  /*<--Margin / Padding / Border>*/
+  margin: 3px 0;
+
+  /*<--Fonts-->*/
+  font-size: 24px;
+  font-weight: 600;
+
+  /*<--Colors-->*/
+}

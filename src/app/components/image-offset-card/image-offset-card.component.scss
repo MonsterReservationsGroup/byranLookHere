@@ -1,73 +1,105 @@
 @import "../../../vars";
 
-:host {
-  /*<--Position / Display-->*/
-  display: block;
-  position: absolute;
-  width: 300px;
-  height: 175px;
-  color: $base-text-color;
+$border-radius: 8px;
 
-  /*<--Margin / Padding / Border>*/
-  border-radius: 7px;
-
-  /*<--Fonts-->*/
-
-  /*<--Colors-->*/
-  background-color: rgba(0, 0, 0, 0.03);
-}
-
-img {
-  /*<--Position / Display-->*/
-  display: block;
+::ng-deep .text-box {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  width: max(200px, 20vw);
+  aspect-ratio: 12/7;
   position: relative;
-  top: -25%;
-  left: 50%;
-  transform: translateX(-50%);
+  border-radius: $border-radius;
 
-  /*<--Margin / Padding / Border>*/
-  width: 30%;
-  border-radius: 7px;
+  /* Font, Background, Foreground, Color, Animation */
+  font-size: max(16px, 1.2vw);
+  background-color: rgba(0, 0, 0, 0.05);
 
-  /*<--Fonts-->*/
+  &__image {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: $border-radius;
+    opacity: 0;
 
-  /*<--Colors-->*/
-}
-
-.textBox {
-  /*<--Position / Display-->*/
-  transform: translateY(-20px);
-
-  /*<--Margin / Padding / Border>*/
-
-  /*<--Fonts-->*/
-
-  /*<--Colors-->*/
+    /* Font, Background, Foreground, Color, Animation */
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
 
   &__title {
-    /*<--Position / Display-->*/
-    display: block;
-    width: fit-content;
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translateX(-50%);
 
-    /*<--Margin / Padding / Border>*/
-    margin: 0 auto;
-
-    /*<--Fonts-->*/
-
-    /*<--Colors-->*/
-    color: black;
+    /* Font, Background, Foreground, Color, Animation */
+    text-align: center;
+    font-size: 1em;
+    font-weight: 500;
   }
 
   &__content {
-    /*<--Position / Display-->*/
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    width: fit-content;
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+    top: 65%;
 
-    /*<--Margin / Padding / Border>*/
-    margin-top: 20px;
-
-    /*<--Fonts-->*/
+    /* Font, Background, Foreground, Color, Animation */
+    font-size: 0.7em;
+    font-weight: 400;
     text-align: center;
-    font-size: 12px;
+    color: grey;
+  }
+}
 
-    /*<--Colors-->*/
+@include tablet {
+  .text-box {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    width: min(300px, 90vw);
+
+    /* Font, Background, Foreground, Color, Animation */
+  }
+}
+
+.placeholder {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  width: 35%;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border-radius: $border-radius;
+  transform: translateY(-50%);
+
+  /* Font, Background, Foreground, Color, Animation */
+  background-color: transparent;
+}
+
+.placeholder--active {
+  background-color: rgb(216, 217, 212);
+  animation: flash 1s infinite;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

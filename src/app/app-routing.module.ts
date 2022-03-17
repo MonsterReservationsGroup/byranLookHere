@@ -5,10 +5,14 @@ import * as rawPages from './pages';
 const pageRoutes = Object.keys(rawPages).map((rawPage) => {
   //@ts-ignore
   const component = rawPages[rawPage] as any;
-  return {
+  const output = {
     path: rawPage.toLowerCase(),
     component,
+    data: {
+      state: rawPage.toLowerCase(),
+    },
   };
+  return output;
 }) as any;
 
 const routes: Routes = [...pageRoutes];

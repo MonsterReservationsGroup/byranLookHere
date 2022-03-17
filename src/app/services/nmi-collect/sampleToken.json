@@ -1,0 +1,44 @@
+{
+  "tokenType": "lightbox",
+  "token": "54kTa6n5-E5XhUG-8Q3gHm-V7BvZnaFZkK3",
+  "card": {
+    "number": "411111******1111",
+    "bin": "411111",
+    "exp": "1099",
+    "hash": "f6c609e195d9d4c185dcc8ca662f0180",
+    "type": "visa"
+  },
+  "check": {
+    "name": null,
+    "account": null,
+    "hash": null,
+    "aba": null
+  },
+  "wallet": {
+    "cardDetails": null,
+    "cardNetwork": null,
+    "email": null,
+    "billingInfo": {
+      "address1": null,
+      "address2": null,
+      "firstName": null,
+      "lastName": null,
+      "postalCode": null,
+      "city": null,
+      "state": null,
+      "country": null,
+      "phone": null
+    },
+    "shippingInfo": {
+      "address1": null,
+      "address2": null,
+      "firstName": null,
+      "lastName": null,
+      "postalCode": null,
+      "city": null,
+      "state": null,
+      "country": null,
+      "phone": null
+    }
+  }
+}

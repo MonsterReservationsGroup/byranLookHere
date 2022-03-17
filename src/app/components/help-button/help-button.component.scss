@@ -3,9 +3,9 @@
   display: none;
   width: 50px;
   height: 50px;
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
 
   /*<--Margin / Padding / Border>*/
 
@@ -16,6 +16,7 @@
 
 img {
   /*<--Position / Display-->*/
+
   width: 100%;
 
   /*<--Margin / Padding / Border>*/
@@ -31,15 +32,56 @@ img {
   }
 }
 
-@keyframes flip {
+::ng-deep .call-attention {
+  animation: move-and-grow 3s ease-in;
+}
+
+$top: calc(50% + 25px);
+$left: calc(50% - 25px);
+
+@keyframes move-and-grow {
   0% {
+    bottom: 50px;
+    right: 30px;
+  }
+  25% {
+    bottom: $top;
+    right: $left;
+  }
+  35% {
     transform: scale(1, 1);
   }
-  50% {
+  37% {
+    transform: scale(0.8, 0.8);
+  }
+  40% {
     transform: scale(1.5, 1.5);
   }
-  100% {
+  42% {
+    transform: scale(0.8, 0.8);
+  }
+  45% {
     transform: scale(1, 1);
+  }
+  55% {
+    bottom: $top;
+    right: $left;
+  }
+  100% {
+    bottom: 50px;
+    right: 30px;
+  }
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(0deg);
   }
 }
 
@@ -62,6 +104,6 @@ img {
 }
 
 :host.shake {
-  animation: flip 2s ease both;
+  animation: flip 1s ease both;
   transform: translate3d(0, 0, 0);
 }

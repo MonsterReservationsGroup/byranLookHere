@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { map } from 'rxjs';
 import * as interfaces from '../../../../interfaces.d';
 import * as services from '../../services';
 services.fixNeverReadError(interfaces);
@@ -19,12 +20,34 @@ goes to the previous route
   providedIn: 'root',
 })
 export class TimelineService {
-  routes: Array<string> = [];
+  routes: Array<string> = [
+    '/landingcomponent',
+    '/qualificationspagecomponent',
+    '/destinationspagecomponent',
+    '/checkoutcomponent',
+  ];
   currentIndex: number = 0;
   callback: interfaces.NextRouteCallback_ = () => true;
 
   registerCallback(callback: interfaces.NextRouteCallback_) {
     this.callback = callback;
+  }
+
+  isNotLast() {
+    let finalOutput = true;
+    return this.route.events.pipe(
+      map((event: any) => {
+        const i = this.routes.indexOf(event.url);
+        let output = i !== this.routes.length - 1;
+        if (output === false && finalOutput) {
+          finalOutput = false;
+          setTimeout(() => {
+            finalOutput = true;
+          }, 1000);
+        }
+        return finalOutput;
+      })
+    );
   }
 
   next() {

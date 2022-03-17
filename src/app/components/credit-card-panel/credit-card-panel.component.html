@@ -1,0 +1,19 @@
+<h2 id="header">Payment Information</h2>
+<ng-template #noCard>
+  <div @slideIn class="well">
+    <img src="../../../assets/Cards/unknown.png" alt="" />
+    <p>Verified Checkout!</p>
+    <button rafaButton (click)="collectPaymentInformation(100)">
+      Add Card
+    </button>
+  </div>
+</ng-template>
+<div @slideIn class="well" *ngIf="display.cardIcon else noCard">
+  <img [src]="display.cardIcon" alt="" />
+  <section class="well__details">
+    <p class="well__details--main">Ending with {{display.lastFourDigits}}</p>
+    <p class="well__details--meta">Expires {{display.expirationDate}}</p>
+    <p class="well__details--meta">Last updated {{display.lastUpdate}}</p>
+  </section>
+  <button rafaButton (click)="collectPaymentInformation(100)">Edit</button>
+</div>

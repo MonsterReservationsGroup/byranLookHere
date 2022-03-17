@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import * as interfaces from '../../../../interfaces.d';
 import * as services from '../../services';
 services.fixNeverReadError(interfaces);
@@ -12,15 +12,15 @@ takes body as ng content
 
 ********************/
 
-@Component({ 
+@Component({
   selector: 'rafa-hero',
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.scss'],
 })
-export class HeroComponent {
+export class HeroComponent implements AfterViewInit {
   @Input('title') title: string = '';
   @Input('catchphrase') catchphrase: string = '';
   constructor() {}
 
-  ngOnInit(): void {}
+  ngAfterViewInit() {}
 }
