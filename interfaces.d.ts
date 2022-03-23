@@ -4,6 +4,7 @@ import {
   DestinationSelectionRoot_,
   ReservationObject,
 } from 'monster-datrix-engine';
+import { CaledarService } from './src/app/services';
 export type Guest_ = ReservationObject;
 export type Destinations_ = DestinationSelectionRoot_[];
 export type Destination_ = DestinationSelectionRoot_;
@@ -40,7 +41,16 @@ export interface MaritalButton_ {
   selected: boolean;
 }
 export interface ListItem_ {
-  value: string;
-  isDisabled?: boolean;
+  label: string;
+  value: any;
+  disabled?: boolean;
   icon: string;
+}
+export interface DatepickerOption_ {
+  value: Date;
+  label: string;
+  selected: boolean;
+  disabled: boolean;
+  renderDisabledIcon: boolean;
+  callback?: (calendar: CaledarService) => void;
 }

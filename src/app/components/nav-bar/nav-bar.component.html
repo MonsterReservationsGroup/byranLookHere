@@ -1,6 +1,8 @@
 <div class="leftGroup">
   <img src="https://i.ibb.co/374R7dv/monster-copy.png" />
-  <a *ngFor="let link of links" [href]="link.url">{{link.text}}</a>
+  <a target="_blank" *ngFor="let link of links" [href]="link.url"
+    >{{link.text}}</a
+  >
 </div>
 
 <div class="desktopOnly">

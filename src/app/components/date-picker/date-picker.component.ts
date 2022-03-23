@@ -3,6 +3,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { eachYearOfInterval, getDaysInMonth, subYears } from 'date-fns';
 import * as interfaces from '../../../../interfaces.d';
 import * as services from '../../services';
+import data from './data.json';
 services.fixNeverReadError(interfaces);
 
 /*****Description*****
@@ -30,20 +31,8 @@ outputs a standard javascript date object
 })
 export class DatePickerComponent implements OnInit {
   [key: string]: any;
-  months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
+  daysOfTheWeek = data.daysOfTheWeek;
+  months = data.months;
   years = null as any;
   days = null as any;
   private selectedDay = 0;
@@ -59,7 +48,7 @@ export class DatePickerComponent implements OnInit {
     year: number
   ) => null | string = (d, m, y) => null;
   @Input('headless') headless = false;
-  @Input('label') label = 'Select a date';
+  @Input('label') label = data.defaultLabel;
   @Output('onChange') onChangeEmitter = new EventEmitter<Date>();
   get reset() {
     return this._reset;

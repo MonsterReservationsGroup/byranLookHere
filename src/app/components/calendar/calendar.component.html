@@ -1,0 +1,72 @@
+<div class="input" *ngIf="!headless">
+  <label
+    [class.input__label--active]="isSelecting || selectedDate"
+    (click)="input.focus()"
+    for="display"
+    class="input__label"
+    >{{label}}</label
+  >
+  <input
+    [value]="selectedDate | dateFormatter"
+    autocomplete="off"
+    (focus)="isSelecting = true"
+    #input
+    class="input__display"
+    name="display"
+  />
+</div>
+
+<rafa-mask *ngIf="isSelecting" (click)="isSelecting = false">
+  <div
+    (click)="isSelecting = false"
+    [class.headless-label--active]="isSelecting"
+    class="headless-label"
+  >
+    {{label}}
+  </div>
+  <div
+    [class.display-container--active]="isSelecting"
+    class="display-container display-container--active"
+  >
+    <div class="options">
+      <rafa-select
+        [listItems]="monthsToRender"
+        class="options__select"
+        [placeholder]="selectedMonth"
+        (onSelect)="changeMonth($event)"
+        >one</rafa-select
+      >
+      <rafa-select
+        class="options__select"
+        [placeholder]="selectedYear"
+        [listItems]="yearsToRender"
+        (onSelect)="changeYear($event)"
+        >one</rafa-select
+      >
+    </div>
+    <ng-template #disabledIcon>
+      <img src="../../../assets/remove.svg" class="date-picker__icon" />
+    </ng-template>
+    <div class="date-picker">
+      <p *ngFor="let header of headers" class="date-picker__header">
+        {{header}}
+      </p>
+      <span
+        class="date-picker__date"
+        [ngClass]="{
+            'date-picker__date--selected': day.selected && !day.disabled,
+            'date-picker__date--disabled': day.disabled
+          }"
+        (click)="select(day)"
+        *ngFor="let day of daysToRender"
+      >
+        <p *ngIf="!day.renderDisabledIcon; else disabledIcon ">{{day.label}}</p>
+      </span>
+    </div>
+  </div>
+</rafa-mask>
+<div
+  class="mask"
+  [class.mask--active]="isSelecting"
+  (click)="isSelecting = false"
+></div>

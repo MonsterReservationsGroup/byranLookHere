@@ -1,0 +1,241 @@
+@import "../../../vars";
+
+:host {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  width: 100%;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+}
+
+.headless-label {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  display: none;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+
+  &--active {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    display: block;
+    position: fixed;
+    width: 100%;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+    font-size: clamp(50px, 7vw, 70px);
+    font-weight: 600;
+    text-align: center;
+    color: #fff;
+  }
+}
+
+.display-container {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  position: fixed;
+  top: 50%;
+  left: 150%;
+  z-index: 1 !important;
+  padding: 0 15px 15px 15px;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  opacity: 0;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+  background-color: #fff;
+  transition: all 0.3s ease-in-out;
+
+  &--active {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    opacity: 1;
+    left: 50%;
+    z-index: 2 !important;
+
+    /* Font, Background, Foreground, Color, Animation */
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+  }
+}
+.options {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 20px;
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+
+  &__select {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    min-width: 100px;
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+  }
+
+  &::after {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    position: absolute;
+    bottom: 10px;
+    content: "";
+    display: block;
+    width: 95%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+  }
+}
+
+.date-picker {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  display: grid;
+  grid-template-columns: repeat(7, 40px);
+  gap: 5px;
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+  font-weight: 500;
+
+  &__icon {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    max-width: 30px;
+
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+    cursor: not-allowed;
+  }
+
+  &__date {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    cursor: pointer;
+
+    &--disabled {
+      /*Size, Position, Display,  Margin, Padding, Border*/
+      /* Box-shadow Font, Background, Foreground, Color, Animation, */
+      color: $base-text-color;
+      cursor: not-allowed;
+    }
+
+    &--selected {
+      /*Size, Position, Display,  Margin, Padding, Border*/
+      border-radius: 4px;
+      box-shadow: 0 0 0 1px;
+      /* Box-shadow Font, Background, Foreground, Color, Animation, */
+      color: $primary-color;
+      background-color: rgba(255, 255, 255, 0.2);
+      transition: all 0.2s ease-in-out;
+    }
+
+    &--selected-animation {
+      /*Size, Position, Display,  Margin, Padding, Border*/
+      /* Box-shadow Font, Background, Foreground, Color, Animation, */
+      animation: squish 0.5s ease-in-out;
+    }
+  }
+
+  &__header {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+    text-align: center;
+    color: $primary-color;
+    font-weight: 600;
+  }
+}
+
+.input {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  width: 100%;
+  margin-top: 15px;
+  position: relative;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+  &__display {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    /* Font, Background, Foreground, Color, Animation */
+    font-size: 20px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.5);
+
+    &:focus {
+      /*Size, Position, Display,  Margin, Padding, Border*/
+      border: 2px solid $primary-color;
+      outline: none;
+      box-shadow: none;
+      /* Font, Background, Foreground, Color, Animation */
+    }
+  }
+
+  &__label {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    transition: all 0.2s ease-in-out;
+
+    /* Font, Background, Foreground, Color, Animation */
+    font-size: 20px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.5);
+
+    &--active {
+      @include focused;
+    }
+  }
+}
+
+@keyframes squish {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  75% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.mask {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  /* Font, Background, Foreground, Color, Animation */
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity 0.3s ease-in-out;
+
+  &--active {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+    /* Font, Background, Foreground, Color, Animation */
+    animation: active 0.3s ease-in-out forwards;
+  }
+}
+
+@keyframes active {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

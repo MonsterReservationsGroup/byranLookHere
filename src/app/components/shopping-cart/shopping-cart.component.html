@@ -1,6 +1,6 @@
 <h2>Shopping Cart</h2>
-<span>
-  <div @slideOut *ngFor="let item of state.cart" class="listItem">
+<span class="cart-container">
+  <div *ngFor="let item of state.cart" class="listItem">
     <img class="listItem__picture" [src]="item.icon" alt="" />
     <section class="listItem__details">
       <div class="listItem__details--name">{{item.name}}</div>
@@ -9,6 +9,12 @@
     <section class="endContainer">
       <div id="price" class="endContainer__price">${{item.price}}</div>
       <section class="endContainer__removeContainer">
+        <img
+          *ngIf="state.cart.length === 1 && !item.isRemovable"
+          class="endContainer__removeContainer--remove"
+          (click)="state.generateCart()"
+          src="../../../assets/add.png"
+        />
         <img
           (click)="state.removeFromCart(item.id)"
           *ngIf="item.isRemovable"

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import * as interfaces from '../../../../interfaces.d';
+import { fadeInOut } from '../../animations/fade-in-out';
 import * as services from '../../services';
 services.fixNeverReadError(interfaces);
 
@@ -13,8 +14,12 @@ This page allows the guest to view and correct their data
   selector: 'rafa-qualifications-page',
   templateUrl: './qualifications-page.component.html',
   styleUrls: ['./qualifications-page.component.scss'],
+  animations: [fadeInOut],
 })
 export class QualificationsPageComponent implements AfterViewInit {
+  validateDate(date: Date) {
+    return date.getDate() === 15;
+  }
   form = this.fb.group({
     maritalStatus: ['', []],
     zipCode: ['', []],
@@ -33,5 +38,7 @@ export class QualificationsPageComponent implements AfterViewInit {
 
   ngOnInit(): void {}
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    this.form.valueChanges.subscribe(console.log);
+  }
 }

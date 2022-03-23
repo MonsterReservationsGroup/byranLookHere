@@ -187,3 +187,25 @@ outputs a standard javascript date object
 ### date-formatter UI:PIPE
 
  format the date using date fns 
+
+### calendar UI:COMPONENT
+
+ takes a default day
+allows you to pick a month
+allows you to pick a year
+generates a grid with the days of the month
+allows you to select a day
+
+### caledar UI:SERVICE
+
+ provides all headless functions for the date picker
+generate months
+generate years
+generate days for month-year
+get the last days between last sunday of last month and first day of this month
+get the first days between the first saturday of next month and the last day of this month
+
+
+### mask UI:COMPONENT
+
+ this component displays all its content in a column oriented flexbox. 

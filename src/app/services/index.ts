@@ -8,3 +8,5 @@ export { TimelineService } from './timeline/timeline.service';
 
 
 export { NmiCollectService } from './nmi-collect/nmi-collect.service';
+
+export { CaledarService } from './caledar/caledar.service';

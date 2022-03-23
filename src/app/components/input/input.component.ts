@@ -24,6 +24,7 @@ this component puts together an input and an optional label
 })
 export class InputComponent implements OnInit {
   @Input('label') label: string = '';
+  @Input('chips') chips: { label: string; value: number }[] = [];
   value = '';
   focused = false;
   onChange = (value: string) => null;
@@ -43,7 +44,9 @@ export class InputComponent implements OnInit {
 
   setDisabledState?(isDisabled: boolean): void {}
 
-  writeValue(obj: string): void {
+  writeValue(obj: string, flag?: boolean): void {
+    if (flag) {
+    }
     this.setValue(obj);
   }
 

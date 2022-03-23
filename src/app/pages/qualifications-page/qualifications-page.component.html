@@ -11,13 +11,17 @@
     *ngIf="this.form.get('maritalStatus')!.value && !form.get('maritalStatus')!.value?.includes('Single')"
     formControlName="spouseName"
     label="Spouse Name"
-    class="growIn"
   ></rafa-input>
-  <rafa-date-picker
-    class="form__date-picker"
-    label="Date of Birth"
-    formControlName="dob"
-  ></rafa-date-picker>
+  <!-- <rafa-date-picker -->
+  <!--   class="form__date-picker" -->
+  <!--   label="Date of Birth" -->
+  <!--   formControlName="dob" -->
+  <!-- ></rafa-date-picker> -->
   <rafa-input formControlName="zipCode" label="Zip Code"></rafa-input>
-  <rafa-input formControlName="income" label="Income"></rafa-input>
+  <rafa-input
+    [chips]="[{label:'<49.9k', value: 49.9}, {label:'50-59k', value: 59}, {label:'60-69k', value: 69}, {label:'70-89.90k', value: 90}, {label:'90k+', value: 91}]"
+    formControlName="income"
+    label="Income"
+  ></rafa-input>
+  <rafa-calendar formControlName="dob" label="Date of Birth"></rafa-calendar>
 </form>

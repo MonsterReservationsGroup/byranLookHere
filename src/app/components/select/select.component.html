@@ -1,19 +1,22 @@
 <ng-template #listItemTemplate let-items>
-  <div class="listItem" *ngFor="let item of items" (click)="select(item)">
+  <div
+    class="listItem"
+    [class.selected]="item.selected"
+    *ngFor="let item of items"
+    (click)="select(item)"
+  >
     <img
       onerror="this.parentNode.removeChild(this)"
       [src]="item.icon || ''"
       class="listItem__icon"
     />
-    <p [class.fit]="item.isDisabled" class="listItem__text">
-      {{item.value || item}}
-    </p>
+    <p [class.fit]="item.disabled" class="listItem__text">{{item.label}}</p>
   </div>
 </ng-template>
 
 <div class="select">
   <button class="select__button" (click)="toggle()" rafaButton>
-    {{selection}}
+    {{selection.label}}
   </button>
   <div
     *ngIf="open && listItems && listItems[0]"

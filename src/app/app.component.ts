@@ -10,7 +10,7 @@ import Hammer from 'hammerjs';
 import { rotateCubeToLeft, rotateCubeToRight } from 'ngx-router-animations';
 import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
-import { TimelineService } from './services';
+import { CaledarService, TimelineService } from './services';
 
 @Component({
   selector: 'app-root',
@@ -54,7 +54,8 @@ export class AppComponent implements AfterViewInit {
     private el: ElementRef,
     private timeline: TimelineService,
     private router: Router,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    private calendar: CaledarService
   ) {}
   ngAfterViewInit() {
     this.configureSwipe().subscribe(async (ev) => {

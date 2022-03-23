@@ -8,6 +8,62 @@
 
   /* Font, Background, Foreground, Color, Animation */
 }
+
+.mask {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+  padding: 30px;
+  border: 1px dashed;
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+
+  &__title {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+    text-align: center;
+    color: #fff;
+    font-size: clamp(40px, 5vw, 70px);
+    font-weight: 600;
+    text-align: center;
+  }
+
+  &__sub-title {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+    color: #fff;
+  }
+
+  &__arrow-container {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+  }
+
+  &__down-arrow {
+    width: clamp(150px, 10vw, 200px);
+    animation: bounce 1s infinite;
+  }
+
+  &__example {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+    z-index: 999;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: 1s ease-in-out;
+  }
+}
+
 .flex {
   /*Size, Position, Display,  Margin, Padding, Border*/
   position: relative;
@@ -74,4 +130,11 @@
   to {
     opacity: 1;
   }
+}
+
+.destination {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  z-index: 0;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
 }

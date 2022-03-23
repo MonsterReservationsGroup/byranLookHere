@@ -28,6 +28,8 @@ import { DatePickerComponent } from './components/date-picker/date-picker.compon
 import { DestinationsPageComponent } from './pages/destinations-page/destinations-page.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { DateFormatterPipe } from './pipes/date-formatter/date-formatter.pipe';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { MaskComponent } from './components/mask/mask.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import { DateFormatterPipe } from './pipes/date-formatter/date-formatter.pipe';
     DestinationsPageComponent,
     CheckoutComponent,
     DateFormatterPipe,
+    CalendarComponent,
+    MaskComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+@import "../../../vars";
 .select {
   position: relative;
   /*<--Position / Display-->*/
@@ -116,4 +117,11 @@
 // }
 .button {
   width: 100%;
+}
+
+.selected {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+  color: $primary-color;
 }

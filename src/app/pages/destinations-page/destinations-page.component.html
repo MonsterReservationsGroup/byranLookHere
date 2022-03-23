@@ -5,43 +5,40 @@
     Time to pick your destination.
   </p></rafa-hero
 >
+<rafa-calendar
+  [validation]="validate"
+  label="Pick a date!"
+  #picker
+  [headless]="true"
+></rafa-calendar>
 <div class="flex">
   <rafa-image-card
-    (click)="picker.toggle()"
-    imageUrl="https://www.flytap.com/-/media/Flytap/new-tap-pages/destinations/north-america/dominican-republic/punta-cana/Images-Landing-Page-Destinations-punta-cana/PUJ_PagDestino_JUN2021_HeroeBannerMobile_1024x553.jpg"
-    title="Puna Cana"
-    footer="$11"
-    >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae odio iste
-    nihil labore quisquam blanditiis, voluptate nemo ex alias nulla repellat,
-    atque id a nam, natus deleniti debitis maxime aperiam?</rafa-image-card
+    *ngFor="let dest of testOptions"
+    (click)="toggleDate(picker)"
+    class="destination"
+    [imageUrl]="dest.image"
+    [title]="dest.title"
+    [footer]="dest.footer"
+    >{{dest.lorem}}</rafa-image-card
   >
-  <rafa-image-card
-    (click)="picker.toggle()"
-    imageUrl="https://i0.wp.com/bransontravel.com/wp-content/uploads/2020/09/aquarium.jpg"
-    title="Branson"
-    footer="$11"
-  >
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam hic, in nobis
-    molestiae dolorem iste vitae magnam, asperiores quibusdam veniam voluptatum
-    eaque harum sed sit, unde nihil non dolor perspiciatis?</rafa-image-card
-  >
-  <rafa-image-card
-    (click)="picker.toggle()"
-    imageUrl="https://www.flytap.com/-/media/Flytap/new-tap-pages/destinations/north-america/dominican-republic/punta-cana/Images-Landing-Page-Destinations-punta-cana/PUJ_PagDestino_JUN2021_HeroeBannerMobile_1024x553.jpg"
-    title="Puna Cana"
-    footer="$11"
-    >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae odio iste
-    nihil labore quisquam blanditiis, voluptate nemo ex alias nulla repellat,
-    atque id a nam, natus deleniti debitis maxime aperiam?</rafa-image-card
-  >
+</div>
+<div
+  (click)="toggleTutorialShown()"
+  *ngIf="tutorialShown"
+  @fadeInOut
+  class="mask"
+>
+  <h1 class="mask__title">Click on a destination to open the calendar</h1>
+  <p class="mask__sub-title">(click anywhere to close)</p>
+  <img class="mask__down-arrow" src="../../../assets//down-arrow.png" alt="" />
   <rafa-image-card
     (click)="picker.toggle()"
     imageUrl="https://www.flytap.com/-/media/Flytap/new-tap-pages/destinations/north-america/dominican-republic/punta-cana/Images-Landing-Page-Destinations-punta-cana/PUJ_PagDestino_JUN2021_HeroeBannerMobile_1024x553.jpg"
-    title="Puna Cana"
-    footer="$11"
+    class="mask__example"
+    title="Punta Cana"
+    footer="$99 deposit"
     >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae odio iste
     nihil labore quisquam blanditiis, voluptate nemo ex alias nulla repellat,
     atque id a nam, natus deleniti debitis maxime aperiam?</rafa-image-card
   >
 </div>
-<rafa-date-picker [headless]="true" #picker></rafa-date-picker>

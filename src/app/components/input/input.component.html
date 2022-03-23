@@ -14,5 +14,15 @@
     (blur)="focused = false"
     type="text"
     class="field__input"
+    [value]="value"
   />
+</div>
+<div class="chip-container">
+  <div *ngFor="let chip of chips" class="chip">
+    <span
+      (click)="writeValue(chip.value.toString())"
+      class="chip-container__text"
+      >{{chip.label}}</span
+    >
+  </div>
 </div>

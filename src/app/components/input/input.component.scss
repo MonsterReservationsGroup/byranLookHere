@@ -1,5 +1,33 @@
 @import "../../../vars";
+:host {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  width: 100%;
 
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+}
+
+.chip-container {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 20px;
+  max-width: 100%;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+
+  &__text {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    padding: 5px;
+    border-radius: 8px;
+
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+    color: #fff;
+    background-color: $primary-color;
+  }
+}
 .field {
   /*<--Position / Display-->*/
   position: relative;
@@ -48,6 +76,7 @@
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     padding: 10px;
+    width: 100%;
 
     /*<--Fonts-->*/
     font-size: 20px;
