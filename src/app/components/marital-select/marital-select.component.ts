@@ -28,6 +28,9 @@ export class MaritalSelectComponent implements OnInit {
   currentValue: string = null as any;
   blurb: Array<string> = [] as any;
   onChange = (value: any) => console.log(value);
+  isTyping = new Promise((r) => {
+    r('');
+  });
   onTouch = () => {};
   maritalButtons: Array<interfaces.MaritalButton_> = [
     { value: 'Married', blurb: 'I am Married', selected: false },
@@ -48,21 +51,26 @@ export class MaritalSelectComponent implements OnInit {
 
   constructor() {}
 
-  selectItem(index: number) {
+  async selectItem(index: number) {
+    await this.isTyping;
+    let resolve = (value: unknown) => {};
+    this.isTyping = new Promise((r) => {
+      resolve = r;
+    });
     this.reset();
     this.maritalButtons[index].selected = true;
-    this.typeBlurb(this.maritalButtons[index].blurb, 10);
+    this.typeBlurb(this.maritalButtons[index].blurb, 10, resolve);
     this.currentValue = this.maritalButtons[index].value;
     this.onChange(this.currentValue);
     this.onTouch();
   }
 
-  async typeBlurb(blurb: string, delay: number): Promise<void> {
+  async typeBlurb(blurb: string, delay: number, resolve: any): Promise<void> {
     await new Promise((resolve) => setTimeout(resolve, delay));
     const workingString = blurb.split('');
-    if (workingString.length === 0) return;
+    if (workingString.length === 0) return resolve();
     this.blurb.push(workingString.shift() as any);
-    return this.typeBlurb(workingString.join(''), delay);
+    return this.typeBlurb(workingString.join(''), delay, resolve);
   }
 
   writeValue(value: string) {
@@ -90,6 +98,10 @@ export class MaritalSelectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.typeBlurb('Select your Marital Status', 10);
+    let resolve = (value: unknown) => {};
+    this.isTyping = new Promise((r) => {
+      resolve = r;
+    });
+    this.typeBlurb('Select your Marital Status', 10, resolve);
   }
 }

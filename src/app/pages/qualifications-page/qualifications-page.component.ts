@@ -1,5 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 import * as interfaces from '../../../../interfaces.d';
 import { fadeInOut } from '../../animations/fade-in-out';
 import * as services from '../../services';
@@ -20,6 +21,7 @@ export class QualificationsPageComponent implements AfterViewInit {
   validateDate(date: Date) {
     return date.getDate() === 15;
   }
+
   form = this.fb.group({
     maritalStatus: ['', []],
     zipCode: ['', []],
@@ -34,11 +36,26 @@ export class QualificationsPageComponent implements AfterViewInit {
     return null;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private crm: services.CrmService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {}
 
-  ngAfterViewInit() {
-    this.form.valueChanges.subscribe(console.log);
+  async ngAfterViewInit() {
+    this.spinner.show();
+    const guest = await this.crm.previousGuest;
+    let { maritalStatus, zipCode, income, name, dob } = guest;
+    dob = new Date(dob);
+    this.form.patchValue({
+      maritalStatus,
+      zipCode,
+      income,
+      name,
+      dob,
+    });
+    this.spinner.hide();
   }
 }

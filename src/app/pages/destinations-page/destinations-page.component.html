@@ -14,13 +14,13 @@
 ></rafa-calendar>
 <div class="flex">
   <rafa-image-card
-    *ngFor="let dest of testOptions"
+    *ngFor="let dest of options"
     (click)="toggleDate(picker, dest)"
     class="destination"
-    [imageUrl]="dest.image"
+    [imageUrl]="dest.photoUrl"
     [title]="dest.destName"
     [footer]="dest.footer"
-    >{{dest.lorem}}</rafa-image-card
+    >{{dest.description}}</rafa-image-card
   >
 </div>
 <rafa-mask

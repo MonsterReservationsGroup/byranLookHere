@@ -49,6 +49,7 @@ const sample_card = {
 export class CrmService {
   getReservationEndpoint =
     'https://us-central1-crm-sdk.cloudfunctions.net/getReservation';
+
   requestedFields = [
     'resID',
     'name',
@@ -75,10 +76,16 @@ export class CrmService {
     'ownsWith',
     'childrenAges',
   ];
+
   test = 'palantir';
   datrix = createDatrix('VGhpcyBpcyBhIHNlcnZpY2UgdG9rZW4uIEl0J3MgMzcu');
-  previousGuest = {} as any;
-  constructor(private state: StateService, private http: HttpClient) {}
+  previousGuest = new Promise(() => {}) as any;
+  previousGuestResolver = null as any;
+  constructor(private state: StateService, private http: HttpClient) {
+    this.previousGuest = new Promise((resolve) => {
+      this.previousGuestResolver = resolve;
+    });
+  }
 
   // get a guest based on hash, returns a promise;
   get guest(): Promise<interfaces.Guest_> {
@@ -91,7 +98,7 @@ export class CrmService {
     });
     const $guest = this.http.post(getReservationEndpoint, payload).pipe(
       tap((previousGuest) => {
-        this.previousGuest = previousGuest;
+        this.previousGuestResolver(previousGuest);
       }),
       take(1)
     );
@@ -103,9 +110,25 @@ export class CrmService {
     return datrix.getActiveCategories(guest);
   }
 
+  async getDestinations(guest: any) {
+    const datrix = await this.datrix;
+    return datrix.getDestinations(guest);
+  }
+
   async checkSingleDate(location: string, date: string, guest: any) {
     const datrix = await this.datrix;
     return datrix.checkSingleDate(location, date, guest);
+  }
+
+  async getCalendar(destination: string, date: string, guest: any) {
+    const datrix = await this.datrix;
+    console.log('inside service');
+    console.log({
+      destination,
+      date,
+      guest,
+    });
+    return datrix.getCalendar(destination, date, guest);
   }
 
   async submitDateleg(newRes: any, roomDetails: any) {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import * as interfaces from '../../../../interfaces.d';
 import { fadeInOut } from '../../animations/fade-in-out';
 import * as services from '../../services';
@@ -41,9 +42,14 @@ export class DestinationsPageComponent implements OnInit {
     return Math.random() > 0.9;
   }
 
-  toggleDate(picker: any, dest: any) {
+  async toggleDate(picker: any, dest: any) {
     this.state.selectedDestination = dest;
-    console.log(this.state);
+    const guest = await this.crm.previousGuest;
+    const destString = this.state.selectedDestination.destName;
+    const date = new Date().getTime();
+    console.log({ guest, destString, date });
+    const calendar = await this.crm.getCalendar(destString, destString, date);
+    console.log(calendar);
     if (this.tutorialShown) return;
     picker.toggle();
   }
@@ -53,23 +59,31 @@ export class DestinationsPageComponent implements OnInit {
     this.tutorialShown = false;
   }
 
-  moveToNext(e: Date) {
+  async moveToNext(e: Date) {
     this.state.selectedDate = e;
     this.timeline.next();
   }
 
+  options = [] as Array<any>;
   testOptions = [1, 1, 2, 1, 2, 1].map((c) => testCardTemplates[c - 1]);
   destinationPicked = false;
   tutorialShown = false;
 
   constructor(
     private state: services.StateService,
-    private timeline: services.TimelineService
+    private timeline: services.TimelineService,
+    private crm: services.CrmService,
+    private spinner: NgxSpinnerService
   ) {}
 
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.tutorialShown = true;
-    }, 300);
+  async ngOnInit() {
+    this.spinner.show();
+    this.options = await this.crm.getDestinations(await this.crm.previousGuest);
+    console.log(this.options);
+    this.spinner.hide();
+
+    // setTimeout(() => {
+    //   this.tutorialShown = true;
+    // }, 300);
   }
 }

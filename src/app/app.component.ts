@@ -24,7 +24,7 @@ const sample_guest = {
   destination: 'SMD - Gatlinburg, TN',
   dob: '1975-12-30',
   email: 'brittanyl@monsterrg.com',
-  income: 50,
+  income: 100,
   isHomeowner: 'Homeowner',
   isTso: false,
   majorCC: 'Has Major CC',
@@ -102,13 +102,9 @@ export class AppComponent implements AfterViewInit {
     private crm: CrmService
   ) {}
   async ngAfterViewInit() {
-    const g = this.crm.guest as Promise<any>;
+    const g = await this.crm.guest;
     const ac = await this.crm.getActiveCategories(g);
-    console.log(ac);
     const dr = await this.crm.checkSingleDate('Orlando, FL', '3/25/2022', g);
-    console.log(dr);
-
-    console.log(await g);
     this.configureSwipe().subscribe(async (ev) => {
       if (ev.offsetDirection === 4) {
         //back
