@@ -58,6 +58,7 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.cal.registerValidation(this.valudation);
+    this.render();
   }
 
   stopPropagation(e: Event) {
@@ -67,13 +68,11 @@ export class CalendarComponent implements OnInit, OnChanges {
   constructor(public cal: services.CaledarService, private el: ElementRef) {}
 
   changeMonth(e: interfaces.ListItem_) {
-    console.log('ran month');
     const newDate = this.cal.shiftMonth(e.value);
     this.preSelect({ value: newDate });
   }
 
   changeYear(e: interfaces.ListItem_) {
-    console.log('ran year');
     const newDate = this.cal.shiftYear(e.value);
     this.preSelect({ value: newDate });
     this.render();
@@ -82,7 +81,9 @@ export class CalendarComponent implements OnInit, OnChanges {
   preSelect(item: Partial<interfaces.DatepickerOption_>) {
     if (item.disabled) return;
     if (item.value) this.selectedDate = item.value;
-    this.render();
+    setTimeout(() => {
+      this.render();
+    }, 10);
   }
 
   writeValue(value: Date) {
@@ -102,7 +103,6 @@ export class CalendarComponent implements OnInit, OnChanges {
     this.onChange(item.value as Date);
     if (item.value) this.selectedDate = item.value;
     if (this.hasInitialized) {
-      console.log('emitting');
       this.onSelect.emit(item.value);
     }
     this.hasInitialized = true;
@@ -113,12 +113,12 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   private render() {
-    this.selectedMonth = this.cal.getMonth();
     this.cal.currentSelection = this.selectedDate;
+    this.selectedMonth = this.cal.getMonth();
     this.daysToRender = this.cal.generateCalendar(this.selectedDate);
     this.yearsToRender = this.cal.generateYears(this.startYear, this.endYear);
     this.monthsToRender = this.cal.generateMonths(this.selectedDate);
-    this.selectedYear = this.selectedDate.getFullYear().toString();
+    this.selectedYear = this.selectedDate?.getFullYear().toString();
     this.monthsToRender = this.cal.generateMonths(this.selectedDate);
   }
 

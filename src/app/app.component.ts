@@ -102,9 +102,7 @@ export class AppComponent implements AfterViewInit {
     private crm: CrmService
   ) {}
   async ngAfterViewInit() {
-    const g = await this.crm.guest;
-    const ac = await this.crm.getActiveCategories(g);
-    const dr = await this.crm.checkSingleDate('Orlando, FL', '3/25/2022', g);
+    await this.crm.guest;
     this.configureSwipe().subscribe(async (ev) => {
       if (ev.offsetDirection === 4) {
         //back

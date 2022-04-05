@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { addMonths, startOfDay } from 'date-fns';
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as interfaces from '../../../../interfaces.d';
 import { fadeInOut } from '../../animations/fade-in-out';
@@ -41,17 +42,40 @@ export class DestinationsPageComponent implements OnInit {
   validate(date: Date) {
     return Math.random() > 0.9;
   }
+  referenceCalendar = null as any;
 
   async toggleDate(picker: any, dest: any) {
     this.state.selectedDestination = dest;
     const guest = await this.crm.previousGuest;
     const destString = this.state.selectedDestination.destName;
     const date = new Date().getTime();
-    console.log({ guest, destString, date });
-    const calendar = await this.crm.getCalendar(destString, destString, date);
-    console.log(calendar);
+    const calendar = await this.crm.getCalendar(
+      destString,
+      date,
+      addMonths(date, 3).getTime(),
+      guest
+    );
+    this.referenceCalendar = calendar;
+
+    this.validate = (date: Date) => {
+      const flatCalendar = calendar.qualifiedDevs
+        .map((d: any) => d.calendar)
+        .flat();
+      const processedCalendar = new Set(
+        flatCalendar.reduce((acc: any, curr: any) => {
+          if (curr.isAvailable === false) {
+            acc.push(startOfDay(new Date(curr.milliDate)).getTime());
+          }
+          return acc;
+        }, [])
+      );
+      const output =
+        processedCalendar.has(startOfDay(date).getTime()) ||
+        date.getTime() > addMonths(new Date(), 3).getTime() ||
+        date.getTime() < new Date().getTime();
+      return output;
+    };
     // below here is irrelevant, for the current test
-    return;
     if (this.tutorialShown) return;
     picker.toggle();
   }
@@ -62,7 +86,14 @@ export class DestinationsPageComponent implements OnInit {
   }
 
   async moveToNext(e: Date) {
-    this.state.selectedDate = e;
+    const flatCalendar = this.referenceCalendar.qualifiedDevs
+      .map((d: any) => d.calendar)
+      .flat();
+    this.state.selectedDate = flatCalendar.find(
+      (d: any) =>
+        startOfDay(new Date(d.milliDate)).getTime() === startOfDay(e).getTime()
+    );
+    console.log(this.state.selectedDate);
     this.timeline.next();
   }
 
@@ -81,11 +112,10 @@ export class DestinationsPageComponent implements OnInit {
   async ngOnInit() {
     this.spinner.show();
     this.options = await this.crm.getDestinations(await this.crm.previousGuest);
-    console.log(this.options);
     this.spinner.hide();
 
-    // setTimeout(() => {
-    //   this.tutorialShown = true;
-    // }, 300);
+    setTimeout(() => {
+      this.tutorialShown = true;
+    }, 300);
   }
 }

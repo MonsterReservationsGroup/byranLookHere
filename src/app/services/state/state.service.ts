@@ -26,7 +26,7 @@ export class StateService {
   private _guest: interfaces.Guest_ = {} as any;
   private _availableDestinations: interfaces.Destinations_ = [];
   private _selectedDestination: interfaces.Destination_ = null as any;
-  private _selectedDate: Date = null as any;
+  private _selectedDate: any = null as any;
   private _upsells: interfaces.Upsell_[] = [];
   private _creditCardToken: interfaces.TokenTypeD = null as any;
   private _cart: Array<interfaces.CartItem_> = [];
@@ -73,14 +73,13 @@ export class StateService {
     return this._selectedDestination;
   }
 
-  set selectedDate(date: Date) {
+  set selectedDate(date: any) {
     this._selectedDate = date;
   }
 
-  get selectedDate(): Date {
+  get selectedDate(): any {
     return this._selectedDate;
   }
-
 
   get upsells(): interfaces.Upsell_[] {
     return this._upsells;
@@ -109,7 +108,9 @@ export class StateService {
     };
     const destination: interfaces.CartItem_ = {
       id: '2',
-      description: `The $150 refundable deposit ensures your accomodations are secured. Check-in Date: ${this.selectedDate?.toLocaleDateString()}`,
+      description: `The $150 refundable deposit ensures your accomodations are secured. Check-in Date: ${new Date(
+        this.selectedDate.milliDate
+      )?.toLocaleDateString()}`,
       icon: '../../../assets/cart/vacations.svg',
       isRemoved: false,
       isRemovable: false,

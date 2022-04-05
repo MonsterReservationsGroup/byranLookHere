@@ -1,9 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { createDatrix } from 'monster-datrix-engine';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { lastValueFrom, take, tap } from 'rxjs';
 import { StateService } from '..';
 import * as interfaces from '../../../../interfaces.d';
+
+type Unix_Epoch = number;
 
 /*****Description*****
 
@@ -83,7 +86,11 @@ export class CrmService {
   );
   previousGuest = new Promise(() => {}) as any;
   previousGuestResolver = null as any;
-  constructor(private state: StateService, private http: HttpClient) {
+  constructor(
+    private state: StateService,
+    private http: HttpClient,
+    private spinner: NgxSpinnerService
+  ) {
     this.previousGuest = new Promise((resolve) => {
       this.previousGuestResolver = resolve;
     });
@@ -122,20 +129,22 @@ export class CrmService {
     return datrix.checkSingleDate(location, date, guest);
   }
 
-  async getCalendar(destination: string, date: string, guest: any) {
+  async getCalendar(
+    destination: string,
+    dateStart: Unix_Epoch,
+    dateEnd: Unix_Epoch,
+    guest: any
+  ) {
     const datrix = await this.datrix;
-    console.log('inside service');
-    console.log({
-      destination,
-      date,
-      guest,
-    });
-    return datrix.getCalendar(destination, date, guest);
+    return datrix.getDateRange(destination, dateStart, dateEnd, guest);
   }
 
-  async submitDateleg(newRes: any, roomDetails: any) {
+  async submitDateleg(newRes: any) {
+    this.spinner.show();
     const datrix = await this.datrix;
-    datrix.sendDateLeg({
+    const roomDetails = this.state.selectedDate.availableRoomTypes[0];
+    console.log({ roomDetails, newRes });
+    const result = await datrix.sendDateLeg({
       existingRes: this.previousGuest,
       newRes,
       checklist: sample_checklist,
@@ -146,5 +155,7 @@ export class CrmService {
       successfulCards: [],
       user: 'Datrix Engine Test',
     });
+    this.spinner.hide();
+    console.log(result);
   }
 }

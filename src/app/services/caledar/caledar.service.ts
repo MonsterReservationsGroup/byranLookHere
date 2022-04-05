@@ -64,13 +64,19 @@ export class CaledarService {
   constructor() {}
 
   getMonth() {
-    return this._monthSeeds[this._currentSelection.getMonth()];
+    try {
+      return this._monthSeeds[this._currentSelection.getMonth()];
+    } catch {
+      return this._monthSeeds[new Date().getMonth()];
+    }
   }
 
   generateBeginingDays(defaultDate: Date): interfaces.DatepickerOption_[] {
+    if (this._currentSelection) {
+    }
     const workingDate = new Date(
-      this._currentSelection.getFullYear(),
-      this._currentSelection.getMonth(),
+      this._currentSelection?.getFullYear(),
+      this._currentSelection?.getMonth(),
       1
     );
     const lastSundayOfLastMonth = previousSunday(workingDate);
@@ -79,9 +85,9 @@ export class CaledarService {
     let index = daysInMonth - lastSundayOfLastMonth.getDate();
     while (output.length <= index) {
       const value = new Date(
-        this._currentSelection.getFullYear(),
-        this._currentSelection.getMonth(),
-        lastSundayOfLastMonth.getDate() + output.length
+        this._currentSelection?.getFullYear(),
+        this._currentSelection?.getMonth(),
+        lastSundayOfLastMonth?.getDate() + output.length
       );
       const renderDisabledIcon = this.validation(value);
       output.push({
@@ -98,8 +104,8 @@ export class CaledarService {
   generateEndDays(defaultDate: Date) {
     const daysInMonth = getDaysInMonth(defaultDate);
     const workingDate = new Date(
-      this._currentSelection.getFullYear(),
-      this._currentSelection.getMonth(),
+      this._currentSelection?.getFullYear(),
+      this._currentSelection?.getMonth(),
       daysInMonth
     );
 
@@ -108,8 +114,8 @@ export class CaledarService {
     let index = 1;
     for (let index = 1; firstSaturdayOfNextMonth.getDate() >= index; index++) {
       const value = new Date(
-        this._currentSelection.getFullYear(),
-        this._currentSelection.getMonth(),
+        this._currentSelection?.getFullYear(),
+        this._currentSelection?.getMonth(),
         index
       );
       const renderDisabledIcon = this.validation(value);
@@ -136,7 +142,7 @@ export class CaledarService {
   shiftYear(date: Date) {
     const day = getDate(this._currentSelection);
     const outDef = new Date(
-      date.getFullYear(),
+      date?.getFullYear(),
       this._currentSelection.getMonth(),
       day
     );
@@ -158,8 +164,8 @@ export class CaledarService {
     const output = allRawYears.map((year) => {
       const output: interfaces.DatepickerOption_ = {
         value: year,
-        label: year.getFullYear().toString(),
-        selected: year.getFullYear() === this._currentSelection.getFullYear(),
+        label: year.getFullYear()?.toString(),
+        selected: year?.getFullYear() === this._currentSelection?.getFullYear(),
         disabled: false,
         renderDisabledIcon: false,
       };
@@ -171,7 +177,7 @@ export class CaledarService {
   shiftMonth(date: Date) {
     const day = getDate(this._currentSelection);
     const outDef = new Date(
-      this._currentSelection.getFullYear(),
+      this._currentSelection?.getFullYear(),
       date.getMonth(),
       day
     );
@@ -184,12 +190,12 @@ export class CaledarService {
     const output = this._monthSeeds.map((month, index) => {
       const output: interfaces.DatepickerOption_ = {
         value: new Date(
-          this._currentSelection.getFullYear(),
+          this._currentSelection?.getFullYear(),
           index,
           getDate(this._currentSelection)
         ),
         label: month,
-        selected: index === this._currentSelection.getMonth(),
+        selected: index === this._currentSelection?.getMonth(),
         disabled: false,
         renderDisabledIcon: false,
       };
@@ -202,8 +208,8 @@ export class CaledarService {
     if (defaultDate) {
       const day = getDate(defaultDate);
       const outDef = new Date(
-        this._currentSelection.getFullYear(),
-        this._currentSelection.getMonth(),
+        this._currentSelection?.getFullYear(),
+        this._currentSelection?.getMonth(),
         day
       );
       this._currentSelection = outDef;
@@ -214,8 +220,8 @@ export class CaledarService {
       const newDay: number = output.length + 1;
       const targetDay = getDate(this._currentSelection);
       const value = new Date(
-        this._currentSelection.getFullYear(),
-        this._currentSelection.getMonth(),
+        this._currentSelection?.getFullYear(),
+        this._currentSelection?.getMonth(),
         newDay
       );
       const renderDisabledIcon = this.validation(value);

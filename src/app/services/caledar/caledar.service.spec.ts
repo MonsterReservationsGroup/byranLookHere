@@ -38,9 +38,8 @@ describe('CaledarService', () => {
   it('Should generate a range of days with a default', () => {
     const defaultDay = new Date(2010, 0, 1);
     const days = service.generateDays(defaultDay);
-    // console.log(days);
+    console.log(days);
     expect(days.length).toBe(31);
-    // console.log(days[0]);
     expect(days[0].label).toBe('1');
     expect(days[30].label).toBe('31');
     expect(days.find((d) => d.selected)!.label).toBe('1');
