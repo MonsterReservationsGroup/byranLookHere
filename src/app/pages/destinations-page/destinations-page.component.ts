@@ -50,6 +50,8 @@ export class DestinationsPageComponent implements OnInit {
     console.log({ guest, destString, date });
     const calendar = await this.crm.getCalendar(destString, destString, date);
     console.log(calendar);
+    // below here is irrelevant, for the current test
+    return;
     if (this.tutorialShown) return;
     picker.toggle();
   }
