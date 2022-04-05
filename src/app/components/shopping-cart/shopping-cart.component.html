@@ -1,28 +1,10 @@
 <h2>Shopping Cart</h2>
 <span class="cart-container">
-  <div *ngFor="let item of state.cart" class="listItem">
-    <img class="listItem__picture" [src]="item.icon" alt="" />
-    <section class="listItem__details">
-      <div class="listItem__details--name">{{item.name}}</div>
-      <div class="listItem__details--description">{{item.description}}</div>
-    </section>
-    <section class="endContainer">
-      <div id="price" class="endContainer__price">${{item.price}}</div>
-      <section class="endContainer__removeContainer">
-        <img
-          *ngIf="state.cart.length === 1 && !item.isRemovable"
-          class="endContainer__removeContainer--remove"
-          (click)="state.generateCart()"
-          src="../../../assets/add.png"
-        />
-        <img
-          (click)="state.removeFromCart(item.id)"
-          *ngIf="item.isRemovable"
-          src="../../../assets/cart/cancel-2.svg"
-          class="endContainer__removeContainer--remove"
-        />
-      </section>
-    </section>
+  <div *ngFor="let unit of state.cart" class="listItem">
+    <div class="mask" *ngIf="unit.isRemoved"></div>
+    <ng-container
+      *ngTemplateOutlet="cartItem; context: {$implicit: unit}"
+    ></ng-container>
   </div>
 </span>
 <div class="footer">
@@ -35,3 +17,36 @@
   </div>
   <p class="footer__end">Total: ${{state.cart | cartTotal}}</p>
 </div>
+
+<ng-template #cartItem let-item>
+  <img class="listItem__picture" [src]="item.icon" alt="" />
+  <section class="listItem__details">
+    <div class="listItem__details--name">{{item.name}}</div>
+    <div class="listItem__details--description">{{item.description}}</div>
+  </section>
+  <section class="endContainer">
+    <div id="price" class="endContainer__price">${{item.price}}</div>
+    <section class="endContainer__removeContainer">
+      <img
+        *ngIf="state.cart.length === 1 && !item.isRemovable"
+        class="endContainer__removeContainer--remove"
+        (click)="state.generateCart()"
+        src="../../../assets/add.png"
+      />
+      <img
+        (click)="state.removeFromCart(item.id)"
+        *ngIf="item.isRemovable && !item.isRemoved"
+        src="../../../assets/cart/cancel-2.svg"
+        class="endContainer__removeContainer--remove"
+      />
+      <img
+        *ngIf="item.isRemoved"
+        class="endContainer__removeContainer--remove"
+        (click)="state.generateCart()"
+        src="../../../assets/add.png"
+      />
+    </section>
+  </section>
+</ng-template>
+
+<ng-template #add> </ng-template>

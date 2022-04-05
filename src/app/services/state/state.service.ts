@@ -102,14 +102,15 @@ export class StateService {
         'Now offering a peace of mind option! We know life happens, so in order to protect you from rescheduling fees, we created White Glove Service! This service protects your deposit, allows you to reschedule dates, and you also receive a Travel Guide Ebook all about the destination you are traveling too!',
       icon: '../../../assets/cart/flip-flops.png',
       isRemovable: true,
+      isRemoved: false,
       name: 'White Glove Service',
       price: 99,
     };
     const destination: interfaces.CartItem_ = {
       id: '2',
-      description:
-        'The $150 refundable deposit ensures your accomodations are secured.',
+      description: `The $150 refundable deposit ensures your accomodations are secured. Check-in Date: ${this.selectedDate?.toLocaleDateString()}`,
       icon: '../../../assets/cart/vacations.svg',
+      isRemoved: false,
       isRemovable: false,
       name: `Activation! ${this.selectedDestination?.destName || 'lorum'}`,
       price: 150,
@@ -123,6 +124,12 @@ export class StateService {
   }
 
   removeFromCart(id: string) {
-    this._cart = this._cart.filter((item) => item.id !== id);
+    console.log(id);
+    this._cart = this.cart.map((item) => {
+      if (item.id === id) {
+        item.isRemoved = true;
+      }
+      return item;
+    });
   }
 }

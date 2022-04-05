@@ -4,13 +4,13 @@ $border-radius: 8px;
 
 ::ng-deep .text-box {
   /*Size, Position, Display,  Margin, Padding, Border*/
-  width: max(200px, 20vw);
+  max-width: 400px;
   aspect-ratio: 12/7;
   position: relative;
   border-radius: $border-radius;
 
   /* Font, Background, Foreground, Color, Animation */
-  font-size: max(16px, 1.2vw);
+  font-size: clamp(16px, 1.2vw, 20px);
   background-color: rgba(0, 0, 0, 0.05);
 
   &__image {
@@ -34,7 +34,7 @@ $border-radius: 8px;
 
     /* Font, Background, Foreground, Color, Animation */
     text-align: center;
-    font-size: 1em;
+    font-size: min(18px, 1.6em);
     font-weight: 500;
   }
 
@@ -51,15 +51,6 @@ $border-radius: 8px;
     font-weight: 400;
     text-align: center;
     color: grey;
-  }
-}
-
-@include tablet {
-  .text-box {
-    /*Size, Position, Display,  Margin, Padding, Border*/
-    width: min(300px, 90vw);
-
-    /* Font, Background, Foreground, Color, Animation */
   }
 }
 

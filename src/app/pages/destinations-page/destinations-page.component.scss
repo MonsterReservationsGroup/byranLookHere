@@ -11,18 +11,7 @@
 
 .mask {
   /*Size, Position, Display,  Margin, Padding, Border*/
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 300%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 1;
-  padding: 30px;
-  border: 1px dashed;
+
   /* Box-shadow Font, Background, Foreground, Color, Animation, */
 
   &__title {

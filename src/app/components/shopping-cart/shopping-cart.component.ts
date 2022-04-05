@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { slideOut } from 'src/app/animations/slide-out';
-import { StateService, TimelineService } from '../../services';
+import { TimelineService, StateService } from '../../services';
 
 /*****Description*****
 

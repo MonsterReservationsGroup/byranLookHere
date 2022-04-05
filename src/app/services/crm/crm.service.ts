@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom, take } from 'rxjs';
+import { createDatrix } from 'monster-datrix-engine';
+import { lastValueFrom, take, tap } from 'rxjs';
 import { StateService } from '..';
 import * as interfaces from '../../../../interfaces.d';
 
@@ -11,6 +12,36 @@ set a guest based on the sale
 
 
 ********************/
+const sample_checklist = {
+  accountNumber: '',
+  ficoChecked: false,
+  genieNumber: '12345678',
+  activator: '2424',
+  activatingVo: '2424',
+  optionalNotes: 'test note',
+  numOfNights: 3,
+  textToDeveloper: '',
+};
+
+const sample_card = {
+  token: {
+    cardType: 'visa',
+    cardExp: '1025',
+    lastFour: '1111',
+    token: 'test token',
+  },
+  billingInfo: {
+    address1: 'PO Box 100',
+    city: 'Myrtle Beach',
+    first_name: 'Test Pass 1',
+    last_name: '',
+    state: 'South Carolina',
+    zip: '29587',
+    salesOffice: 'ACT MB',
+  },
+  amount: 219,
+  recurring: false,
+};
 
 @Injectable({
   providedIn: 'root',
@@ -45,19 +76,50 @@ export class CrmService {
     'childrenAges',
   ];
   test = 'palantir';
+  datrix = createDatrix('VGhpcyBpcyBhIHNlcnZpY2UgdG9rZW4uIEl0J3MgMzcu');
+  previousGuest = {} as any;
   constructor(private state: StateService, private http: HttpClient) {}
 
   // get a guest based on hash, returns a promise;
   get guest(): Promise<interfaces.Guest_> {
     const { getReservationEndpoint, requestedFields, test } = this;
-    const { guestHash: hash } = this.state.queryParams;
-    const $guest = this.http
-      .post(getReservationEndpoint, {
-        test,
-        requestedFields,
-        hash,
-      })
-      .pipe(take(1));
+    // guestHash is undefined, using John Test as the default value
+    const hash = this.state.queryParams?.guestHash || 'PY9JSMXYQY';
+    const payload = JSON.stringify({
+      test,
+      hash,
+    });
+    const $guest = this.http.post(getReservationEndpoint, payload).pipe(
+      tap((previousGuest) => {
+        this.previousGuest = previousGuest;
+      }),
+      take(1)
+    );
     return lastValueFrom($guest) as any;
+  }
+
+  async getActiveCategories(guest: any) {
+    const datrix = await this.datrix;
+    return datrix.getActiveCategories(guest);
+  }
+
+  async checkSingleDate(location: string, date: string, guest: any) {
+    const datrix = await this.datrix;
+    return datrix.checkSingleDate(location, date, guest);
+  }
+
+  async submitDateleg(newRes: any, roomDetails: any) {
+    const datrix = await this.datrix;
+    datrix.sendDateLeg({
+      existingRes: this.previousGuest,
+      newRes,
+      checklist: sample_checklist,
+      extras: [],
+      preppedCards: [sample_card],
+      roomDetails,
+      runPayment: true,
+      successfulCards: [],
+      user: 'Datrix Engine Test',
+    });
   }
 }

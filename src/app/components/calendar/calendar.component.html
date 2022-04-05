@@ -18,15 +18,14 @@
 
 <rafa-mask *ngIf="isSelecting" (click)="isSelecting = false">
   <div
-    (click)="isSelecting = false"
     [class.headless-label--active]="isSelecting"
-    class="headless-label"
+    class="headless-label fadeIn"
   >
     {{label}}
   </div>
   <div
     [class.display-container--active]="isSelecting"
-    class="display-container display-container--active"
+    class="display-container display-container--active fadeIn"
   >
     <div class="options">
       <rafa-select
@@ -34,6 +33,7 @@
         class="options__select"
         [placeholder]="selectedMonth"
         (onSelect)="changeMonth($event)"
+        (click)="stopPropagation($event)"
         >one</rafa-select
       >
       <rafa-select
@@ -41,6 +41,7 @@
         [placeholder]="selectedYear"
         [listItems]="yearsToRender"
         (onSelect)="changeYear($event)"
+        (click)="stopPropagation($event)"
         >one</rafa-select
       >
     </div>

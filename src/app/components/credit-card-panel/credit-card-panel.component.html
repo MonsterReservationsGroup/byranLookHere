@@ -3,7 +3,7 @@
   <div @slideIn class="well">
     <img src="../../../assets/Cards/unknown.png" alt="" />
     <p>Verified Checkout!</p>
-    <button rafaButton (click)="collectPaymentInformation(100)">
+    <button rafaButton class="btn" (click)="collectPaymentInformation(100)">
       Add Card
     </button>
   </div>
@@ -15,5 +15,7 @@
     <p class="well__details--meta">Expires {{display.expirationDate}}</p>
     <p class="well__details--meta">Last updated {{display.lastUpdate}}</p>
   </section>
-  <button rafaButton (click)="collectPaymentInformation(100)">Edit</button>
+  <button class="btn" rafaButton (click)="collectPaymentInformation(100)">
+    Edit
+  </button>
 </div>

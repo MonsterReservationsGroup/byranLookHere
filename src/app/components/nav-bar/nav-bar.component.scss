@@ -1,10 +1,74 @@
 @import "../../../vars";
 
+.link-group {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+}
+
+.button-group {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  position: absolute;
+  right: $base-padding;
+  height: 4vh;
+  top: 20px;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+}
+
+button {
+  height: 100%;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .logo {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    position: absolute;
+    top: $base-padding;
+    left: $base-padding;
+
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+  }
+
+  .link-group {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    position: relative;
+    margin-top: 9vh;
+    margin-right: 0;
+
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+
+    &:before {
+      /*Size, Position, Display,  Margin, Padding, Border*/
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      width: 90vw;
+      transform: translateX(-50%);
+      border: 1px inset $secondary-color;
+
+      /* Box-shadow Font, Background, Foreground, Color, Animation, */
+    }
+  }
+  :host {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    align-items: center;
+    justify-content: center;
+
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+  }
+}
+
 :host {
   /*<--Position / Display-->*/
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: fit-content;
 
@@ -53,7 +117,7 @@ a {
   margin: 0 10px;
 
   /*<--Fonts-->*/
-  font-size: 0.6em;
+  font-size: 1em;
 
   /*<--Colors-->*/
   color: #fff;
@@ -64,10 +128,4 @@ a {
 a:hover {
   font-size: 20px;
   transition: 0.2s ease-out;
-}
-
-@media (max-width: 500px) {
-  .desktopOnly {
-    display: none;
-  }
 }

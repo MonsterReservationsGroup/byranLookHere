@@ -27,7 +27,7 @@ $card-font-size: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: auto;
+  height: 100%;
   gap: 10px;
 
   /*<--Margin / Padding / Border>*/
@@ -55,6 +55,7 @@ img {
   /*<--Position / Display-->*/
   height: 400px;
   object-fit: cover;
+  aspect-ratio: 3/4;
 
   /*<--Margin / Padding / Border>*/
   border-radius: 10px 10px 0 0;

@@ -29,9 +29,9 @@
   /*<--Colors-->*/
 }
 
-@include tablet {
+@media (max-width: 950px) {
   .image-card-container {
     flex-direction: column;
-    gap: 75px;
+    gap: 90px;
   }
 }

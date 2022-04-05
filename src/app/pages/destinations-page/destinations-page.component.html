@@ -10,19 +10,20 @@
   label="Pick a date!"
   #picker
   [headless]="true"
+  (onSelect)="moveToNext($event)"
 ></rafa-calendar>
 <div class="flex">
   <rafa-image-card
     *ngFor="let dest of testOptions"
-    (click)="toggleDate(picker)"
+    (click)="toggleDate(picker, dest)"
     class="destination"
     [imageUrl]="dest.image"
-    [title]="dest.title"
+    [title]="dest.destName"
     [footer]="dest.footer"
     >{{dest.lorem}}</rafa-image-card
   >
 </div>
-<div
+<rafa-mask
   (click)="toggleTutorialShown()"
   *ngIf="tutorialShown"
   @fadeInOut
@@ -32,7 +33,7 @@
   <p class="mask__sub-title">(click anywhere to close)</p>
   <img class="mask__down-arrow" src="../../../assets//down-arrow.png" alt="" />
   <rafa-image-card
-    (click)="picker.toggle()"
+    (click)="toggleDate(picker, null)"
     imageUrl="https://www.flytap.com/-/media/Flytap/new-tap-pages/destinations/north-america/dominican-republic/punta-cana/Images-Landing-Page-Destinations-punta-cana/PUJ_PagDestino_JUN2021_HeroeBannerMobile_1024x553.jpg"
     class="mask__example"
     title="Punta Cana"
@@ -41,4 +42,4 @@
     nihil labore quisquam blanditiis, voluptate nemo ex alias nulla repellat,
     atque id a nam, natus deleniti debitis maxime aperiam?</rafa-image-card
   >
-</div>
+</rafa-mask>

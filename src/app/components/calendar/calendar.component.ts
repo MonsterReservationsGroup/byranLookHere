@@ -1,4 +1,12 @@
-import { Component, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { subYears } from 'date-fns';
 import * as interfaces from '../../../../interfaces.d';
@@ -33,6 +41,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   @Input('label') label: string = '';
   @Input('validation') valudation = (date: Date) => false;
   @Input('headless') headless: boolean = false;
+  hasInitialized = false;
   isSelecting = false;
   daysToRender = [] as any[];
   yearsToRender = [] as any[];
@@ -45,9 +54,14 @@ export class CalendarComponent implements OnInit, OnChanges {
   selectedDate = null as unknown as Date;
   headers = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   onChange = (value: Date) => {};
+  @Output('onSelect') onSelect = new EventEmitter();
 
   ngOnChanges() {
     this.cal.registerValidation(this.valudation);
+  }
+
+  stopPropagation(e: Event) {
+    e.stopPropagation();
   }
 
   constructor(public cal: services.CaledarService, private el: ElementRef) {}
@@ -87,6 +101,11 @@ export class CalendarComponent implements OnInit, OnChanges {
     this.isSelecting = false;
     this.onChange(item.value as Date);
     if (item.value) this.selectedDate = item.value;
+    if (this.hasInitialized) {
+      console.log('emitting');
+      this.onSelect.emit(item.value);
+    }
+    this.hasInitialized = true;
   }
 
   toggle() {
@@ -109,6 +128,7 @@ export class CalendarComponent implements OnInit, OnChanges {
       const selection = this.el.nativeElement.getElementsByClassName(
         'date-picker__date--selected'
       )[0];
+      if (!selection) return;
       selection.classList.add('date-picker__date--selected-animation');
       setTimeout(() => {
         selection.classList.remove('date-picker__date--selected-animation');

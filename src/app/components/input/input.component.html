@@ -18,7 +18,7 @@
   />
 </div>
 <div class="chip-container">
-  <div *ngFor="let chip of chips" class="chip">
+  <div [class.chip--active]="focused" *ngFor="let chip of chips" class="chip">
     <span
       (click)="writeValue(chip.value.toString())"
       class="chip-container__text"

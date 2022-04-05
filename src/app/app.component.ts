@@ -10,7 +10,50 @@ import Hammer from 'hammerjs';
 import { rotateCubeToLeft, rotateCubeToRight } from 'ngx-router-animations';
 import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
-import { CaledarService, TimelineService } from './services';
+import { CaledarService, CrmService, TimelineService } from './services';
+
+const sample_guest = {
+  address: '170 Mockingbird Rd, Houston, Texas 32244',
+  address1: '170 Mockingbird Rd',
+  address2: '',
+  city: 'Houston',
+  state: 'Texas',
+  age: 46,
+  childrenAges: [],
+  countryReally: 'United States',
+  destination: 'SMD - Gatlinburg, TN',
+  dob: '1975-12-30',
+  email: 'brittanyl@monsterrg.com',
+  income: 50,
+  isHomeowner: 'Homeowner',
+  isTso: false,
+  majorCC: 'Has Major CC',
+  maritalStatus: 'Married',
+  name: 'John Test',
+  numInParty: 2,
+  numOfAdults: 2,
+  numOfChildren: 0,
+  numOfNights: 3,
+  occupation: 'Doctor (Retired)',
+  ownsWith: 'nobody important',
+  packagePrice: 497.99,
+  phone: '(843) 424-8619',
+  resID: 61027,
+  spouseAge: 42,
+  spouseDob: '1979-12-31',
+  spouseName: 'Jane Test',
+  spouseOccupation: 'Nurse',
+  zipCode: 32244,
+  dateOfBooking: '2019-10-20',
+  salesOffice: 'NRO',
+  monthsOpen: '36',
+  tcpaApproved: 'TCPA Approved',
+  dlState: '0',
+  dlNumber: '0',
+  spouseDlState: '0',
+  spouseDlNumber: '0',
+  isRetired: 'no',
+};
 
 @Component({
   selector: 'app-root',
@@ -55,9 +98,17 @@ export class AppComponent implements AfterViewInit {
     private timeline: TimelineService,
     private router: Router,
     private ref: ChangeDetectorRef,
-    private calendar: CaledarService
+    private calendar: CaledarService,
+    private crm: CrmService
   ) {}
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
+    const g = this.crm.guest as Promise<any>;
+    const ac = await this.crm.getActiveCategories(g);
+    console.log(ac);
+    const dr = await this.crm.checkSingleDate('Orlando, FL', '3/25/2022', g);
+    console.log(dr);
+
+    console.log(await g);
     this.configureSwipe().subscribe(async (ev) => {
       if (ev.offsetDirection === 4) {
         //back

@@ -33,6 +33,7 @@ export interface CartItem_ {
   icon: string;
   description: string;
   isRemovable: boolean;
+  isRemoved: boolean;
   price: number;
 }
 export interface MaritalButton_ {

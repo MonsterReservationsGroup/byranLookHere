@@ -1,11 +1,11 @@
-<div class="leftGroup">
-  <img src="https://i.ibb.co/374R7dv/monster-copy.png" />
+<img src="https://i.ibb.co/374R7dv/monster-copy.png" class="logo" />
+<div class="link-group">
   <a target="_blank" *ngFor="let link of links" [href]="link.url"
     >{{link.text}}</a
   >
 </div>
 
-<div class="desktopOnly">
+<div class="button-group">
   <button
     *ngIf="isNotLast"
     (click)="timeline.next()"

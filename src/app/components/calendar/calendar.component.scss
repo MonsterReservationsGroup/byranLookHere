@@ -1,5 +1,8 @@
 @import "../../../vars";
 
+button {
+  height: 40px;
+}
 :host {
   /*Size, Position, Display,  Margin, Padding, Border*/
   width: 100%;
@@ -16,11 +19,6 @@
   &--active {
     /*Size, Position, Display,  Margin, Padding, Border*/
     display: block;
-    position: fixed;
-    width: 100%;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
     z-index: 999;
 
     /* Box-shadow Font, Background, Foreground, Color, Animation, */
@@ -33,18 +31,14 @@
 
 .display-container {
   /*Size, Position, Display,  Margin, Padding, Border*/
-  position: fixed;
-  top: 50%;
-  left: 150%;
   z-index: 1 !important;
   padding: 0 15px 15px 15px;
-  transform: translate(-50%, -50%);
   border-radius: 8px;
   opacity: 0;
 
   /* Box-shadow Font, Background, Foreground, Color, Animation, */
   background-color: #fff;
-  transition: all 0.3s ease-in-out;
+  animation: fade-in-right 5s ease-in-out;
 
   &--active {
     /*Size, Position, Display,  Margin, Padding, Border*/
@@ -57,6 +51,11 @@
     transition: all 0.3s ease-in-out;
   }
 }
+
+.fadeIn {
+  animation: active 0.5s ease-in-out;
+}
+
 .options {
   /*Size, Position, Display,  Margin, Padding, Border*/
   position: relative;
@@ -206,28 +205,6 @@
   }
   100% {
     transform: scale(1);
-  }
-}
-
-.mask {
-  /*Size, Position, Display,  Margin, Padding, Border*/
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  /* Font, Background, Foreground, Color, Animation */
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  transition: opacity 0.3s ease-in-out;
-
-  &--active {
-    /*Size, Position, Display,  Margin, Padding, Border*/
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-
-    /* Font, Background, Foreground, Color, Animation */
-    animation: active 0.3s ease-in-out forwards;
   }
 }
 

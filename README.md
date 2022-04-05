@@ -64,12 +64,12 @@ this service handles the flow of the app
 current index keeps track of the current page
 callback is a function that is called when the next method is called,
 if it returns false the goToNextRoute is not called
-goes to the next route
-goes to the previous route
+goes to the next route;
+goes to the previous route;
 
 ### help-button UI:COMPONENT
 
-only shown on screens smaller than 500px
+only shown on screens smaller than 500px;
 placed in lower left right hand corner of the screen
 scales periodically
 

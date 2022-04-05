@@ -18,14 +18,14 @@ const testCardTemplates = [
     image:
       'https://www.flytap.com/-/media/Flytap/new-tap-pages/destinations/north-america/dominican-republic/punta-cana/Images-Landing-Page-Destinations-punta-cana/PUJ_PagDestino_JUN2021_HeroeBannerMobile_1024x553.jpg',
     lorem,
-    title: 'Punta Cana',
+    destName: 'Punta Cana',
     footer,
   },
   {
     image:
       'https://i0.wp.com/bransontravel.com/wp-content/uploads/2020/09/aquarium.jpg',
     lorem,
-    title: 'Branson',
+    destName: 'Branson',
     footer,
   },
 ];
@@ -41,20 +41,31 @@ export class DestinationsPageComponent implements OnInit {
     return Math.random() > 0.9;
   }
 
-  toggleDate(picker: any) {
+  toggleDate(picker: any, dest: any) {
+    this.state.selectedDestination = dest;
+    console.log(this.state);
     if (this.tutorialShown) return;
     picker.toggle();
   }
 
   async toggleTutorialShown() {
-    await new Promise((resolve) => setTimeout(resolve,));
+    await new Promise((resolve) => setTimeout(resolve, 50));
     this.tutorialShown = false;
   }
+
+  moveToNext(e: Date) {
+    this.state.selectedDate = e;
+    this.timeline.next();
+  }
+
   testOptions = [1, 1, 2, 1, 2, 1].map((c) => testCardTemplates[c - 1]);
   destinationPicked = false;
   tutorialShown = false;
 
-  constructor() {}
+  constructor(
+    private state: services.StateService,
+    private timeline: services.TimelineService
+  ) {}
 
   ngOnInit(): void {
     setTimeout(() => {

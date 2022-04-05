@@ -40,7 +40,8 @@ export class ButtonDirective implements OnChanges {
 
   private makeDefaultStyle() {
     this.ref.nativeElement.style.borderRadius = '6px';
-    this.ref.nativeElement.style.padding = '10px';
+    this.ref.nativeElement.style['padding-left'] = '10px';
+    this.ref.nativeElement.style['padding-right'] = '10px';
     this.ref.nativeElement.style.cursor = 'pointer';
     this.ref.nativeElement.style.outline = 'none';
     this.ref.nativeElement.style.border = 'none';

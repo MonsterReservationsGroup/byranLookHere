@@ -28,6 +28,25 @@
     background-color: $primary-color;
   }
 }
+
+.chip {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  max-height: 0px;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+
+  &--active {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+    max-height: 20px;
+
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+  }
+}
+
 .field {
   /*<--Position / Display-->*/
   position: relative;

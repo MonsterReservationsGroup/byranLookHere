@@ -36,12 +36,12 @@ export class MaritalSelectComponent implements OnInit {
     { value: 'Co-Hab', blurb: 'I am living with someone', selected: false },
     {
       value: 'Married/Co-Hab (Male Couples)',
-      blurb: 'I am in a Same Sex Male couple',
+      blurb: 'I am in a Same Sex Male relationship',
       selected: false,
     },
     {
       value: 'Married/Co-Hab (Female Couples)',
-      blurb: 'I am in a Same Sex Female couple',
+      blurb: 'I am in a Same Sex Female relationship',
       selected: false,
     },
   ];

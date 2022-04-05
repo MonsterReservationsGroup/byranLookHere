@@ -104,6 +104,6 @@ $left: calc(50% - 25px);
 }
 
 :host.shake {
-  animation: flip 1s ease both;
+  animation: shake 1s ease both;
   transform: translate3d(0, 0, 0);
 }
