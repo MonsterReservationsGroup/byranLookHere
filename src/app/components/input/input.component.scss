@@ -51,6 +51,7 @@
   /*<--Position / Display-->*/
   position: relative;
   margin-top: 20px;
+  padding-bottom: 10px;
 
   /*<--Margin / Padding / Border>*/
 
@@ -61,7 +62,7 @@
   &__label {
     /*<--Position / Display-->*/
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 20px;
     transform: translateY(-50%);
 

@@ -207,5 +207,18 @@ get the first days between the first saturday of next month and the last day of 
 
 
 ### mask UI:COMPONENT
-
  this component displays all its content in a column oriented flexbox. 
+ 
+
+
+
+
+
+
+
+### hotel-details UI:PAGE 
+>this page displays the hotel details
+
+### number-picker UI:COMPONENT
+
+ 

@@ -28,7 +28,13 @@
     class="display-container display-container--active fadeIn"
   >
     <div class="options">
+      <img
+        class="arrow"
+        (click)="subtractMonth($event, month)"
+        src="../../../assets/cart/arrow.svg"
+      />
       <rafa-select
+        #month
         [listItems]="monthsToRender"
         class="options__select"
         [placeholder]="selectedMonth"
@@ -37,6 +43,7 @@
         >one</rafa-select
       >
       <rafa-select
+        #year
         class="options__select"
         [placeholder]="selectedYear"
         [listItems]="yearsToRender"
@@ -44,6 +51,11 @@
         (click)="stopPropagation($event)"
         >one</rafa-select
       >
+      <img
+        class="arrow arrow-right"
+        (click)="addMonth($event,month)"
+        src="../../../assets/cart/arrow.svg"
+      />
     </div>
     <ng-template #disabledIcon>
       <img src="../../../assets/remove.svg" class="date-picker__icon" />

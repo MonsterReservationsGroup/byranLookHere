@@ -1,0 +1,28 @@
+<rafa-hero
+  [title]="testData.nights + ' Nights, in a ' + testData.roomType"
+  [catchphrase]="testData.hotelName "
+  ><p class="heroContent">{{testData.description}}</p></rafa-hero
+>
+<div class="gallery">
+  <gallery
+    [attr.fluid]="isFluid"
+    [thumbPosition]="thumbPosition"
+    thumbMode="free"
+    [counter]="false"
+    [dots]="false"
+    [items]="images"
+  ></gallery>
+</div>
+
+<rafa-hero [title]="testData.detailDescription">
+  <p class="heroContent"></p>
+</rafa-hero>
+
+<div class="image-offset-group">
+  <div *ngFor="let amenity of testData.detailItems" class="image-offset">
+    <rafa-image-offset-card [image]="amenity.photoUrl" [title]="amenity.title"
+      >{{amenity.blurb}}
+    </rafa-image-offset-card>
+    <div [class]="amenity?.reviewTag"></div>
+  </div>
+</div>

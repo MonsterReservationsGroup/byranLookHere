@@ -1,8 +1,10 @@
+import { AngularSignaturePadModule } from '@almothafar/angular-signature-pad';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GalleryModule, GALLERY_CONFIG } from 'ng-gallery';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +19,7 @@ import { InputComponent } from './components/input/input.component';
 import { MaritalSelectComponent } from './components/marital-select/marital-select.component';
 import { MaskComponent } from './components/mask/mask.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { NumberPickerComponent } from './components/number-picker/number-picker.component';
 import { QualificationsFormComponent } from './components/qualifications-form/qualifications-form.component';
 import { SelectComponent } from './components/select/select.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
@@ -25,6 +28,7 @@ import { ButtonDirective } from './directives/button/button.directive';
 import { InputDirective } from './directives/input/input.directive';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { DestinationsPageComponent } from './pages/destinations-page/destinations-page.component';
+import { HotelDetailsComponent } from './pages/hotel-details/hotel-details.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { MattsTestPageComponent } from './pages/matts-test-page/matts-test-page.component';
 import { QualificationsPageComponent } from './pages/qualifications-page/qualifications-page.component';
@@ -60,6 +64,8 @@ import { DateFormatterPipe } from './pipes/date-formatter/date-formatter.pipe';
     DateFormatterPipe,
     CalendarComponent,
     MaskComponent,
+    HotelDetailsComponent,
+    NumberPickerComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,8 +74,18 @@ import { DateFormatterPipe } from './pipes/date-formatter/date-formatter.pipe';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
+    GalleryModule,
+    AngularSignaturePadModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: GALLERY_CONFIG,
+      useValue: {
+        dots: true,
+        imageSize: 'cover',
+      },
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

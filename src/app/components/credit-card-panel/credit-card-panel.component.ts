@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Output } from '@angular/core';
 import { slideIn } from 'src/app/animations/slide-in';
 import * as interfaces from '../../../../interfaces.d';
 import {
@@ -30,16 +30,15 @@ export class CreditCardPanelComponent implements AfterViewInit {
   icon: string = null as any;
   lastFour: string = null as any;
   display: interfaces.CardDisplay_ = {} as any;
+  @Output('onAddCard') onAddCard = new EventEmitter();
 
-  constructor(private state: StateService, private nmi: NmiCollectService) {}
-
-  async collectPaymentInformation(amount: number) {
+  constructor(private state: StateService, private nmi: NmiCollectService) {} async collectPaymentInformation() { const amount = this.state.getTotal();
     this.display = {} as any;
     this.token = await this.nmi.collectToken(amount);
     this.state.creditCardToken = this.token;
     this.display = this.nmi.getDisplayData(this.token);
     await new Promise((resolve) => setTimeout(resolve, 1));
-    console.log(this.token);
+    this.onAddCard.emit(this.token);
   }
 
   ngAfterViewInit() {}

@@ -29,6 +29,21 @@ button {
   }
 }
 
+.arrow {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  height: 30px;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+}
+
+.arrow-right {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  height: 30px;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+  transform: rotate(180deg);
+}
+
 .display-container {
   /*Size, Position, Display,  Margin, Padding, Border*/
   z-index: 1 !important;
@@ -62,6 +77,8 @@ button {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  align-items: center;
+  gap: 10px;
   padding: 20px;
   /* Box-shadow Font, Background, Foreground, Color, Animation, */
 

@@ -25,11 +25,20 @@ this component puts together an input and an optional label
 export class InputComponent implements OnInit {
   @Input('label') label: string = '';
   @Input('chips') chips: { label: string; value: number }[] = [];
+  @Input('error') error = '';
   value = '';
   focused = false;
   onChange = (value: string) => null;
   id = `rafa-input-${Math.floor(Math.random() * 99999999999999)}`;
+  onTouched = () => {};
   constructor() {}
+
+  onFocus(el: HTMLInputElement) {
+    this.focused = true;
+    setTimeout(() => {
+      el.select();
+    }, 10);
+  }
 
   setValue(value: string) {
     this.value = value;
@@ -40,7 +49,14 @@ export class InputComponent implements OnInit {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {}
+  onInputBlur() {
+    this.focused = false;
+    this.onTouched();
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
 
   setDisabledState?(isDisabled: boolean): void {}
 

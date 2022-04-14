@@ -4,9 +4,11 @@ export interface TokenTypeD {
   card: Card;
   check: Check;
   wallet: Wallet;
+  amount: number;
+  recurring: false;
 }
 
-export type CardName = 'visa' | 'mastercard' | 'discover' | 'amex'
+export type CardName = 'visa' | 'mastercard' | 'discover' | 'amex';
 
 export interface Card {
   number: string;

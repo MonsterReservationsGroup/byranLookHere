@@ -78,6 +78,14 @@ const sample_guest = {
         useAnimation(rotateCubeToRight)
       ),
       transition(
+        'destinationspagecomponent => hoteldetailscomponent',
+        useAnimation(rotateCubeToLeft)
+      ),
+      transition(
+        'hoteldetailscomponent => checkoutcomponent',
+        useAnimation(rotateCubeToLeft)
+      ),
+      transition(
         'destinationspagecomponent => qualificationspagecomponent',
         useAnimation(rotateCubeToRight)
       ),
@@ -102,18 +110,17 @@ export class AppComponent implements AfterViewInit {
     private crm: CrmService
   ) {}
   async ngAfterViewInit() {
-    await this.crm.guest;
-    this.configureSwipe().subscribe(async (ev) => {
-      if (ev.offsetDirection === 4) {
-        //back
-        this.trigger = 'right';
-        this.timeline.back();
-      } else if (ev.offsetDirection === 2) {
-        //next
-        this.trigger = 'left';
-        this.timeline.next();
-      }
-    });
+    //this.configureSwipe().subscribe(async (ev) => {
+    //  if (ev.offsetDirection === 4) {
+    //    //back
+    //    this.trigger = 'right';
+    //    this.timeline.back();
+    //  } else if (ev.offsetDirection === 2) {
+    //    //next
+    //    this.trigger = 'left';
+    //    this.timeline.next();
+    //  }
+    //});
   }
 
   fireHelpModal() {

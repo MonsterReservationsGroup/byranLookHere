@@ -30,8 +30,36 @@ export class StateService {
   private _upsells: interfaces.Upsell_[] = [];
   private _creditCardToken: interfaces.TokenTypeD = null as any;
   private _cart: Array<interfaces.CartItem_> = [];
+  private _originalGuest = null as any;
+  private _signature = null as any;
+  private _textToDeveloper = null as any;
+
+  set textToDeveloper(text: string) {
+    this._textToDeveloper = text;
+  }
+
+  get textToDeveloper(): string {
+    return this._textToDeveloper;
+  }
+
+  set signature(signature: any) {
+    this._signature = signature;
+  }
+
+  get signature() {
+    console.log(this._signature);
+    return this._signature;
+  }
 
   constructor() {}
+
+  set originalGuest(guest: any) {
+    this._originalGuest = guest;
+  }
+
+  get originalGuest() {
+    return this._originalGuest;
+  }
 
   set creditCardToken(token: interfaces.TokenTypeD) {
     this._creditCardToken = token;
@@ -50,6 +78,9 @@ export class StateService {
   }
 
   set guest(guest: Partial<interfaces.Guest_>) {
+    if (guest.income && guest.income.toString().length > 3) {
+      guest.income /= 1000;
+    }
     Object.assign(this._guest, guest);
   }
 
@@ -110,7 +141,7 @@ export class StateService {
       id: '2',
       description: `The $150 refundable deposit ensures your accomodations are secured. Check-in Date: ${new Date(
         this.selectedDate.milliDate
-      )?.toLocaleDateString()}`,
+      )?.toLocaleDateString()}. Nights: 3`,
       icon: '../../../assets/cart/vacations.svg',
       isRemoved: false,
       isRemovable: false,
@@ -128,10 +159,19 @@ export class StateService {
   removeFromCart(id: string) {
     console.log(id);
     this._cart = this.cart.map((item) => {
+      console.log(item);
+      console.log(id);
       if (item.id === id) {
         item.isRemoved = true;
       }
       return item;
     });
+  }
+
+  getTotal() {
+    return this.cart.reduce((acc, item) => {
+      if (item.isRemoved) return acc;
+      return acc + item.price;
+    }, 0);
   }
 }

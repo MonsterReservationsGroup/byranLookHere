@@ -41,6 +41,23 @@
   }
 }
 
+.numberPickers {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+}
+
+.nextButton {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  height: 50px;
+  width: 100%;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+}
+
 rafa-date-picker {
   /*Size, Position, Display,  Margin, Padding, Border*/
   margin-top: 15px;

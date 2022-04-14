@@ -41,10 +41,13 @@ export class NmiCollectService {
   }
 
   private configureCollectJs(amount: number): Promise<interfaces.TokenTypeD> {
+    const text =
+      amount === 150 ? 'Secure $150 Refundable Deposit' : `Secure $${amount}`;
+
     return new Promise((resolve) => {
       CollectJS.configure({
         paymentSelector: '#customPayButton',
-        buttonText: `Secure $${amount}`,
+        buttonText: text,
         paymentType: 'cc',
         callback: resolve,
       });

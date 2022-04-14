@@ -15,7 +15,15 @@ This is the first step in the landing process
   styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent implements OnInit {
-  constructor() {}
+  constructor(private timeline: services.TimelineService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.timeline.currentIndex = 0;
+    this.timeline.registerCallback(() => true);
+  }
+
+
+  goTo(address: string) {
+    window.location.href = address;
+  }
 }

@@ -1,0 +1,36 @@
+.input-container {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  display: flex;
+  position: relative;
+  align-items: center;
+  gap: 50px;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+}
+
+.number {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 20px;
+  color: grey;
+  transform: translate(-50%, -50%);
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+}
+img {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  height: 40px;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+}
+
+.label {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  top: 0;
+  left: 0;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+  color: grey;
+}

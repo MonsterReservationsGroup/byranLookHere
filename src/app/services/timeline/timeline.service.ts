@@ -24,6 +24,7 @@ export class TimelineService {
     '/landingcomponent',
     '/qualificationspagecomponent',
     '/destinationspagecomponent',
+    '/hoteldetailscomponent',
     '/checkoutcomponent',
   ];
   currentIndex: number = 0;

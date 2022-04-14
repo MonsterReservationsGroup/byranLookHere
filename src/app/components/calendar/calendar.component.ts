@@ -6,12 +6,14 @@ import {
   OnChanges,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { subYears } from 'date-fns';
+import { addMonths, format, subMonths, subYears } from 'date-fns';
 import * as interfaces from '../../../../interfaces.d';
 import { slideIn } from '../../animations/slide-in';
 import * as services from '../../services';
+import { SelectComponent } from '../select/select.component';
 services.fixNeverReadError(interfaces);
 
 /*****Description*****
@@ -41,6 +43,8 @@ export class CalendarComponent implements OnInit, OnChanges {
   @Input('label') label: string = '';
   @Input('validation') valudation = (date: Date) => false;
   @Input('headless') headless: boolean = false;
+  @ViewChild('month') month: SelectComponent = null as any;
+  @ViewChild('year') year: SelectComponent = null as any;
   hasInitialized = false;
   isSelecting = false;
   daysToRender = [] as any[];
@@ -96,6 +100,44 @@ export class CalendarComponent implements OnInit, OnChanges {
     this.onChange = fn;
   }
 
+  addMonth(e: any, month: SelectComponent) {
+    e.stopPropagation();
+    const date = addMonths(this.selectedDate, 1);
+    const label = format(date, 'MMM');
+    month.onWrite(label);
+    const yearLabel = format(date, 'yyyy');
+    this.year.onWrite(yearLabel);
+    const output = {
+      value: date,
+      label,
+      selected: false,
+      disabled: false,
+      icon: '',
+      renderDisabledIcon: false,
+    };
+    this.year.onWrite(this.selectedYear);
+    this.preSelect(output);
+    return output;
+  }
+
+  subtractMonth(e: any, month: SelectComponent) {
+    e.stopPropagation();
+    const date = subMonths(this.selectedDate, 1);
+    const monthLabel = format(date, 'MMM');
+    const yearLabel = format(date, 'yyyy');
+    this.year.onWrite(yearLabel);
+    month.onWrite(monthLabel);
+    const output = {
+      value: date,
+      label: monthLabel,
+      selected: false,
+      disabled: false,
+      icon: '',
+      renderDisabledIcon: false,
+    };
+    this.preSelect(output);
+  }
+
   select(item: Partial<interfaces.DatepickerOption_>) {
     if (item.disabled) return;
     this.preSelect(item);
@@ -113,6 +155,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   private render() {
+    if (this.month?.open || this.year?.open) return;
     this.cal.currentSelection = this.selectedDate;
     this.selectedMonth = this.cal.getMonth();
     this.daysToRender = this.cal.generateCalendar(this.selectedDate);
@@ -123,6 +166,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.hasInitialized = false;
     this.select({ value: this.defaultDate });
     setInterval(() => {
       const selection = this.el.nativeElement.getElementsByClassName(

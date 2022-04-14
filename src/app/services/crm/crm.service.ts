@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { createDatrix } from 'monster-datrix-engine';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { lastValueFrom, take, tap } from 'rxjs';
+import { lastValueFrom, shareReplay, take, tap } from 'rxjs';
+import Swal from 'sweetalert2';
 import { StateService } from '..';
 import * as interfaces from '../../../../interfaces.d';
 
@@ -19,8 +20,8 @@ const sample_checklist = {
   accountNumber: '',
   ficoChecked: false,
   genieNumber: '12345678',
-  activator: '2424',
-  activatingVo: '2424',
+  activator: '8227',
+  activatingVo: '8227',
   optionalNotes: 'test note',
   numOfNights: 3,
   textToDeveloper: '',
@@ -84,20 +85,15 @@ export class CrmService {
   datrix = createDatrix(
     'Q29uZ3JhdHVsYXRpb25zLCB5b3UndmUgZGVjb2RlZCB0aGUgc3NhIHRva2VuLiBEdW1iYXNzLg=='
   );
-  previousGuest = new Promise(() => {}) as any;
-  previousGuestResolver = null as any;
   constructor(
     private state: StateService,
     private http: HttpClient,
     private spinner: NgxSpinnerService
-  ) {
-    this.previousGuest = new Promise((resolve) => {
-      this.previousGuestResolver = resolve;
-    });
-  }
+  ) {}
 
   // get a guest based on hash, returns a promise;
-  get guest(): Promise<interfaces.Guest_> {
+  getGuest(): Promise<interfaces.Guest_> {
+    this.spinner.show();
     const { getReservationEndpoint, requestedFields, test } = this;
     // guestHash is undefined, using John Test as the default value
     const hash = this.state.queryParams?.guestHash || 'PY9JSMXYQY';
@@ -106,25 +102,34 @@ export class CrmService {
       hash,
     });
     const $guest = this.http.post(getReservationEndpoint, payload).pipe(
-      tap((previousGuest) => {
-        this.previousGuestResolver(previousGuest);
-      }),
-      take(1)
+      shareReplay(),
+      take(1),
+      tap((guest) => {
+        this.spinner.hide();
+        this.state.guest = guest;
+        this.state.originalGuest = JSON.parse(JSON.stringify(guest));
+        console.log('guest', guest);
+      })
     );
+
     return lastValueFrom($guest) as any;
   }
 
-  async getActiveCategories(guest: any) {
+  async getActiveCategories(guest: interfaces.Guest_) {
     const datrix = await this.datrix;
     return datrix.getActiveCategories(guest);
   }
 
-  async getDestinations(guest: any) {
+  async getDestinations(guest: interfaces.Guest_) {
     const datrix = await this.datrix;
     return datrix.getDestinations(guest);
   }
 
-  async checkSingleDate(location: string, date: string, guest: any) {
+  async checkSingleDate(
+    location: string,
+    date: string,
+    guest: interfaces.Guest_
+  ) {
     const datrix = await this.datrix;
     return datrix.checkSingleDate(location, date, guest);
   }
@@ -133,29 +138,54 @@ export class CrmService {
     destination: string,
     dateStart: Unix_Epoch,
     dateEnd: Unix_Epoch,
-    guest: any
+    guest: interfaces.Guest_
   ) {
     const datrix = await this.datrix;
     return datrix.getDateRange(destination, dateStart, dateEnd, guest);
   }
 
-  async submitDateleg(newRes: any) {
+  async submitDateleg(newRes: interfaces.Guest_) {
+    const token = this.state.creditCardToken;
+    token.amount = this.state.getTotal();
+    token.recurring = false;
+    const first_name = this.state.guest.name.split(' ')[0];
+    const last_name = this.state.guest.name.split(' ')[1];
+    //@ts-ignore
+    token.billingInfo = {
+      address1: this.state.guest.address1,
+      city: this.state.guest.city,
+      first_name,
+      last_name,
+      state: this.state.guest.state,
+      zip: this.state.guest.zipCode,
+      salesOffice: this.state.guest.salesOffice,
+    };
     this.spinner.show();
     const datrix = await this.datrix;
     const roomDetails = this.state.selectedDate.availableRoomTypes[0];
     console.log({ roomDetails, newRes });
     const result = await datrix.sendDateLeg({
-      existingRes: this.previousGuest,
+      existingRes: this.state.originalGuest,
       newRes,
       checklist: sample_checklist,
       extras: [],
-      preppedCards: [sample_card],
+      preppedCards: [token as any],
       roomDetails,
       runPayment: true,
       successfulCards: [],
       user: 'Datrix Engine Test',
     });
     this.spinner.hide();
+    await Swal.fire({
+      title: 'Success!',
+      text: 'Whohooo! Your reservation has been submitted. You are ready to go on Vacation!',
+      icon: 'success',
+      confirmButtonText: 'OK',
+      footer: 'Click `OK` to check out our website',
+      confirmButtonColor: '#22931f',
+    });
+    window.location.href = 'https://monsterrg.com/';
+
     console.log(result);
   }
 }

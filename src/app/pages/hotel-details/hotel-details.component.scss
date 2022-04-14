@@ -1,0 +1,51 @@
+:host {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 20px;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+}
+
+.gallery {
+  width: 50%;
+}
+
+.image-offset-group {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 125px;
+  margin-top: 50px;
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+}
+
+@media (min-width: 500px) {
+  .image-offset-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .gallery {
+    width: 80%;
+    max-width: 1000px;
+  }
+
+  :host {
+    padding: none;
+  }
+}
+
+.image-offset {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+}

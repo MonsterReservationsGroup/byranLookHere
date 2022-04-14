@@ -15,3 +15,12 @@ body {
 
   /* Font, Background, Foreground, Color, Animation */
 }
+
+.ng-invalid:not(form).ng-touched {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  border-radius: 8px;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+  background-color: #f8d7da;
+  transition: all 0.5s;
+}

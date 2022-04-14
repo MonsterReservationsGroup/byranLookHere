@@ -1,8 +1,8 @@
-import {HttpClientModule} from '@angular/common/http';
-import {TestBed} from '@angular/core/testing';
-import {addDays, startOfDay} from 'date-fns';
-import {createDatrix} from 'monster-datrix-engine';
-import {CrmService, StateService} from '../index';
+import { HttpClientModule } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
+import { addDays, startOfDay } from 'date-fns';
+import { createDatrix } from 'monster-datrix-engine';
+import { CrmService, StateService } from '../index';
 
 class DatrixSub {
   'existingRes' = {
@@ -142,9 +142,7 @@ describe('CrmService', () => {
       'Q29uZ3JhdHVsYXRpb25zLCB5b3UndmUgZGVjb2RlZCB0aGUgc3NhIHRva2VuLiBEdW1iYXNzLg=='
     );
     if (!datrix) return new Error('Datrix not found');
-    const guest = await service.guest;
     const ds = new DatrixSub();
     //  datrix.sendDateLeg(ds);
-
   });
 });

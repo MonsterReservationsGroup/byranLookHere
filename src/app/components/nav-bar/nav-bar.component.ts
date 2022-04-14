@@ -15,6 +15,12 @@ like us on the right
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
+  nextButtonText = 'Get Started';
+
+  goNext() {
+    this.nextButtonText = 'Next!';
+    this.timeline.next();
+  }
   links: Array<interfaces.Link_> = [
     {
       text: 'Website',

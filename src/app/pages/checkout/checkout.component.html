@@ -5,6 +5,22 @@
     </p>
   </rafa-hero>
   <rafa-shopping-cart></rafa-shopping-cart>
-  <rafa-credit-card-panel></rafa-credit-card-panel>
-  <button (click)="finalize()" class="btn" rafaButton>Secure!</button>
+  <rafa-credit-card-panel
+    (onAddCard)="saveCard($event)"
+  ></rafa-credit-card-panel>
+  <p>Please sign below to confirm your reservation.</p>
+  <signature-pad
+    #signature
+    [options]="signaturePadOptions"
+    (drawStart)="drawStart($event)"
+    (drawEnd)="drawComplete($event)"
+  ></signature-pad>
+  <button
+    [disabled]="!(state.creditCardToken && state.signature)"
+    (click)="finalize()"
+    class="btn"
+    [rafaButton]="{coloring: 'light', bouncy: true}"
+  >
+    Secure!
+  </button>
 </div>

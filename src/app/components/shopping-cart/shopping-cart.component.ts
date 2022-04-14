@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { slideOut } from 'src/app/animations/slide-out';
-import { TimelineService, StateService } from '../../services';
+import Swal from 'sweetalert2';
+import { StateService, TimelineService } from '../../services';
 
 /*****Description*****
 
@@ -23,5 +24,20 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit(): void {
     this.state.generateCart();
+  }
+
+  removeItem(item: any) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Are you sure?',
+      text: `You would be leaving your $${this.state.guest.packagePrice} unprotected`,
+      confirmButtonColor: 'grey',
+      showCancelButton: true,
+      cancelButtonColor: 'green',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.state.removeFromCart(item.id);
+      }
+    });
   }
 }

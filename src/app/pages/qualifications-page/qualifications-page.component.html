@@ -8,7 +8,7 @@
   <rafa-marital-select formControlName="maritalStatus"></rafa-marital-select>
   <rafa-input formControlName="name" label="Name"></rafa-input>
   <rafa-input
-    *ngIf="this.form.get('maritalStatus')!.value && !form.get('maritalStatus')!.value?.includes('Single')"
+    *ngIf="form.get('spouseName')"
     formControlName="spouseName"
     label="Spouse Name"
   ></rafa-input>
@@ -19,9 +19,35 @@
   <!-- ></rafa-date-picker> -->
   <rafa-input formControlName="zipCode" label="Zip Code"></rafa-input>
   <rafa-input
-    [chips]="[{label:'-$50K', value: 49.9}, {label:'$50-$59K', value: 59}, {label:'$60-$69K', value: 69}, {label:'$70-$89K', value: 89}, {label:'+$90K', value: 91}]"
+    formControlName="dob"
+    label="Date of Birth"
+    [error]="getDateErrors('dob')"
+  ></rafa-input>
+  <rafa-input
+    *ngIf="form.get('spouseDob')"
+    formControlName="spouseDob"
+    [error]="getDateErrors('spouseDob')"
+    label="Spouse Date of Birth"
+  ></rafa-input>
+  <rafa-input
+    [chips]="[{label:'-$50K', value: 49.9}, {label:'$50-$59K', value: 59000}, {label:'$60-$69K', value: 69000}, {label:'$70-$89K', value: 89000}, {label:'+$90K', value: 91000}]"
     formControlName="income"
     label="Income"
   ></rafa-input>
-  <rafa-calendar formControlName="dob" label="Date of Birth"></rafa-calendar>
+  <div class="numberPickers">
+    <rafa-number-picker
+      formControlName="adults"
+      label="Adults"
+    ></rafa-number-picker>
+    <rafa-number-picker
+      formControlName="children"
+      label="Children"
+    ></rafa-number-picker>
+  </div>
+  <rafa-input
+    *ngFor="let control of extraGuestInfo"
+    [label]="control"
+    [formControlName]="control"
+  ></rafa-input>
+  <!-- <rafa-calendar label="Date of Birth"></rafa-calendar> -->
 </form>

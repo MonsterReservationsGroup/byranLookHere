@@ -6,6 +6,8 @@
   </p></rafa-hero
 >
 <rafa-calendar
+  [startYear]="getStartYear()"
+  [endYear]="getEndYear()"
   [validation]="validate"
   label="Pick a date!"
   #picker
@@ -19,7 +21,6 @@
     class="destination"
     [imageUrl]="dest.photoUrl"
     [title]="dest.destName"
-    [footer]="dest.footer"
     >{{dest.description}}</rafa-image-card
   >
 </div>

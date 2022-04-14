@@ -10,8 +10,8 @@
     #inputField
     [name]="id"
     (input)="setValue(inputField.value)"
-    (focus)="focused = true"
-    (blur)="focused = false"
+    (focus)="onFocus(inputField)"
+    (blur)="onInputBlur()"
     type="text"
     class="field__input"
     [value]="value"
@@ -26,3 +26,4 @@
     >
   </div>
 </div>
+{{error}}

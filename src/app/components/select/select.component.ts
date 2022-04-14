@@ -53,8 +53,9 @@ export class SelectComponent implements OnInit {
   }
 
   onWrite(value: string) {
-    const item = this.listItems.find((item) => item.value === value);
-    if (item) this.select(item);
+    let item = this.listItems.find((item) => item.value === value);
+    if (!item) item = this.listItems.find((item) => item.label === value);
+    if (item) this.select(item, true);
   }
 
   async toggle(e?: any) {
@@ -69,11 +70,13 @@ export class SelectComponent implements OnInit {
     selectedEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
-  select(item: ListItem_) {
+  select(item: ListItem_, stopToggle = false) {
     if (item.disabled) return;
     this.selection = item;
     this.onChange(item.value);
-    this.toggle();
+    if (!stopToggle) {
+      this.toggle();
+    }
     this.onSelect.emit(item);
   }
 

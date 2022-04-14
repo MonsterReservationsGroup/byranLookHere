@@ -34,7 +34,7 @@
         src="../../../assets/add.png"
       />
       <img
-        (click)="state.removeFromCart(item.id)"
+        (click)="removeItem(item)"
         *ngIf="item.isRemovable && !item.isRemoved"
         src="../../../assets/cart/cancel-2.svg"
         class="endContainer__removeContainer--remove"
