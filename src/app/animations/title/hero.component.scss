@@ -1,0 +1,47 @@
+@import "../../../vars";
+
+h6 {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  width: fit-content;
+
+  /* Font, Background, Foreground, Color, Animation */
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: $primary-color;
+}
+
+h1 {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  width: fit-content;
+
+  /* Font, Background, Foreground, Animation, */
+  font-size: 1em;
+  color: black;
+}
+
+::ng-deep .heroContent {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  max-width: 75ch;
+
+  /* Font, Background, Foreground, Color, Animation */
+  font-size: max(12px, 0.35em);
+}
+
+.componentWrapper {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  /* Font, Background, Foreground, Color, Animation */
+  font-size: clamp(18px + 0.1vw, 5vw, 50px);
+  text-align: center;
+  line-height: 2;
+  color: $base-text-color;
+}

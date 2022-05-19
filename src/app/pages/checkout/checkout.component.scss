@@ -1,3 +1,28 @@
+.termsAndConditions {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+  text-align: center;
+  &__body {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+    color: grey;
+  }
+
+  &__header {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+    color: grey;
+  }
+  &__bold {
+    /*Size, Position, Display,  Margin, Padding, Border*/
+
+    /* Box-shadow Font, Background, Foreground, Color, Animation, */
+    font-weight: 900;
+  }
+}
 .btn {
   height: 5vh;
 }

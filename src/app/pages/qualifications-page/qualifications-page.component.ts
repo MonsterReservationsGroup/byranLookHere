@@ -2,6 +2,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { format, subYears } from 'date-fns';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { FormService } from 'src/app/services/form.service';
 import * as interfaces from '../../../../interfaces.d';
 import { fadeInOut } from '../../animations/fade-in-out';
 import * as services from '../../services';
@@ -41,6 +42,8 @@ export class QualificationsPageComponent implements AfterViewInit {
     'Married/Co-Hab (Male Couples)': 2,
     'Married/Co-Hab (Female Couples)': 2,
   };
+
+  minAdults = 1;
 
   validateAdults(control: AbstractControl): any {
     if (this.form) {
@@ -95,6 +98,7 @@ export class QualificationsPageComponent implements AfterViewInit {
         { extraInfo: [] as any, guestInfo: {} as any }
       );
       this.state.guest = outputGuest.guestInfo;
+      this.state.guest = this.form.value;
       let textToDevString = '';
       //@ts-ignore
       if (this.partyKeys[this.form.value.maritalStatus] === 2) {
@@ -106,7 +110,8 @@ export class QualificationsPageComponent implements AfterViewInit {
         ''
       )} `;
     }
-
+    window.scrollTo(0, document.body.scrollHeight + 300);
+    this.formService.saveForm(this.form.value);
     return valid;
   }
 
@@ -137,7 +142,8 @@ export class QualificationsPageComponent implements AfterViewInit {
     private crm: services.CrmService,
     private spinner: NgxSpinnerService,
     private state: services.StateService,
-    public timeline: services.TimelineService
+    public timeline: services.TimelineService,
+    private formService: FormService
   ) {}
 
   ngOnInit(): void {}
@@ -149,15 +155,21 @@ export class QualificationsPageComponent implements AfterViewInit {
     );
   }
 
+  scrollToTop() {
+    window.scrollTo(0, 0);
+  }
+
   async ngAfterViewInit() {
     // adds form inputs for extra info on additional guests
     this.form.valueChanges.subscribe((val) => {
       const adultsModifier =
         //@ts-ignore
         parseInt(val.adults, 10) - this.partyKeys[val.maritalStatus];
+      //@ts-ignore
+      this.minAdults = this.partyKeys[val.maritalStatus];
       const partySize = adultsModifier + (parseInt(val.children, 10) || 0);
       let guestControls: Array<string> = [];
-      console.log({ partySize, adultsModifier });
+      console.log(this.form.value);
       if (partySize > 0) {
         guestControls = [];
         Array(partySize)
@@ -215,9 +227,25 @@ export class QualificationsPageComponent implements AfterViewInit {
     this.timeline.registerCallback(this.nextValidation.bind(this));
     this.timeline.currentIndex = 1;
     this.spinner.show();
-    const guest = await this.crm.getGuest();
-    let { maritalStatus, zipCode, income, name, dob, spouseDob, spouseName } =
-      guest;
+    let guest = {} as any;
+    if (!this.state.guest.name) {
+      guest = await this.crm.getGuest();
+    } else {
+      guest = this.state.guest;
+    }
+
+    let {
+      maritalStatus,
+      zipCode,
+      adults,
+      children,
+      income,
+      name,
+      dob,
+      spouseDob,
+      spouseName,
+    } = guest;
+
     dob = new Date(dob) as any;
     dob = this.formatDate(dob) as any;
     spouseDob = new Date(spouseDob) as any;
@@ -232,14 +260,24 @@ export class QualificationsPageComponent implements AfterViewInit {
       spouseDob,
       spouseName,
       dob,
+      adults,
+      children,
     };
+
     for (const key in payload) {
       // @ts-ignore
       if (!payload[key]) payload[key] = '';
     }
 
     this.state.guest = guest;
-    this.form.patchValue(payload);
+    // get previous value if form prefilled;
+    const finalPayload = this.formService.formIsPopulated
+      ? this.formService.formValues
+      : payload;
+    this.form.patchValue(finalPayload);
+    setTimeout(() => {
+      this.form.patchValue(finalPayload);
+    }, 1000);
     // removing validators from spouse name depending on if it is rendered
     this.form.valueChanges.subscribe(() => {
       const hasSpouse = this.renderSpouseName();

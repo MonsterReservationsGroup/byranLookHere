@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { addMonths, addYears, startOfDay } from 'date-fns';
 import { NgxSpinnerService } from 'ngx-spinner';
+import Swal from 'sweetalert2';
 import * as interfaces from '../../../../interfaces.d';
 import { fadeInOut } from '../../animations/fade-in-out';
 import * as services from '../../services';
@@ -66,7 +67,6 @@ export class DestinationsPageComponent implements OnInit {
       guest
     );
 
-    console.log({ calendar, guest });
     this.referenceCalendar = calendar;
     const flatCalendar = calendar.qualifiedDevs
       .map((d: any) => d.calendar)
@@ -75,6 +75,15 @@ export class DestinationsPageComponent implements OnInit {
     const firstDate = flatCalendar.find((date: any) => {
       return date.isAvailable;
     });
+
+    if (!firstDate) {
+      return Swal.fire({
+        icon: 'warning',
+        title: 'Sorry!',
+        text: 'This destination is sold out for the next three months',
+        confirmButtonColor: 'green',
+      });
+    }
 
     picker.defaultDate = new Date(firstDate.milliDate);
     picker.ngOnInit();
@@ -97,6 +106,7 @@ export class DestinationsPageComponent implements OnInit {
     // below here is irrelevant, for the current test
     if (this.tutorialShown) return;
     picker.toggle();
+    return;
   }
 
   async toggleTutorialShown() {
@@ -105,17 +115,22 @@ export class DestinationsPageComponent implements OnInit {
   }
 
   async moveToNext(e: Date) {
+    console.log({ calendar: this.referenceCalendar });
     const flatCalendar = this.referenceCalendar.qualifiedDevs
       .map((d: any) => d.calendar)
       .flat();
-    console.log(this.referenceCalendar);
-    this.state.selectedDate = flatCalendar.find(
+
+    const options = flatCalendar.filter(
       (d: any) =>
         startOfDay(new Date(d.milliDate)).getTime() === startOfDay(e).getTime()
     );
-    const { selectedDate } = this.state;
-    const { qualifiedDevs } = this.referenceCalendar;
-    console.log({ selectedDate, e, flatCalendar, qualifiedDevs });
+    //@ts-ignore
+    const ranks = options.map((d) => d.devRank);
+    const minRank = Math.min(...ranks);
+    //@ts-ignore
+    const selected = options.find((d) => d.devRank === minRank);
+    console.log({ selectedNext: selected });
+    this.state.selectedDate = selected;
 
     this.timeline.next();
   }
@@ -142,13 +157,14 @@ export class DestinationsPageComponent implements OnInit {
   }
 
   async ngOnInit() {
-    console.log()
     this.spinner.show();
-    const options = await this.crm.getDestinations(this.state.guest);
+    const { guest } = this.state;
+    //@ts-ignore
+    guest.numInParty = guest.adults + guest.children;
+    const options = await this.crm.getDestinations(guest);
     this.options = options.filter((opt) => {
       return opt.qualifiedDevs.length > 0;
     });
-    console.log({ options: this.options, guest: this.state.guest });
     this.timeline.currentIndex = 2;
     this.timeline.registerCallback(this.onNext.bind(this));
     this.spinner.hide();

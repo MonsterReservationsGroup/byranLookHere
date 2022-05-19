@@ -10,6 +10,7 @@ this page displays the hotel details
 ********************/
 
 interface HotelData_ {
+  reviewTag: string;
   hotelName: string;
   description: string;
   nights: number;
@@ -33,10 +34,10 @@ interface HotelDetail_ {
 })
 export class HotelDetailsComponent implements OnInit {
   testData: HotelData_ = {
+    reviewTag: '',
     hotelName: 'the funky monkey lodge',
     roomType: '1 Br Condo',
     nights: 3,
-
     description:
       'Funky Monkey Lodge is located in the lovely beach town of Santa Teresa in Costa Rica. Only 200 m from the white sand beach and set back from the main road, on a gorgeous jungle property. The ideal place to relax, eat amazing food, meet new friends and enjoy some peace surrounded by nature.',
     hotelPictures: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
@@ -100,18 +101,22 @@ export class HotelDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.testData);
+    const { selectedDestination, selectedDate } = this.state;
+    const data = selectedDestination.qualifiedDevs.find((dev) => {
+      return dev.devName === selectedDate.devName;
+    });
+    this.testData = data?.hotelData as any;
+    const { testData } = this;
     const dest = this.state.selectedDestination;
     const date = this.state.selectedDate;
     this.testData.nights = date.availableRoomTypes[0].minNights;
     this.testData.roomType = date.availableRoomTypes[0].roomType;
-    console.log({ dest, date });
     // make responsive
     this.resizeGallery();
     window.onresize = this.resizeGallery.bind(this);
     // turn the test object pictures into gallery items
     this.images = this.testData.hotelPictures.map((_src) => {
-      let src = `../../../assets/Hotel Amenities/fm${_src}.jpeg`;
+      let src = _src;
       return new ImageItem({ src, thumb: src });
     });
   }

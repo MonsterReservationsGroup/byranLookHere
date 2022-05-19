@@ -27,10 +27,6 @@ $border-radius: 8px;
   &__title {
     /*Size, Position, Display,  Margin, Padding, Border*/
     width: 100%;
-    position: absolute;
-    left: 50%;
-    top: 45%;
-    transform: translateX(-50%);
 
     /* Font, Background, Foreground, Color, Animation */
     text-align: center;
@@ -40,11 +36,7 @@ $border-radius: 8px;
 
   &__content {
     /*Size, Position, Display,  Margin, Padding, Border*/
-    width: fit-content;
-    position: absolute;
-    transform: translateX(-50%);
-    left: 50%;
-    top: 65%;
+    width: 100%;
     padding: 10px;
 
     /* Font, Background, Foreground, Color, Animation */

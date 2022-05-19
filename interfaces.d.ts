@@ -21,6 +21,7 @@ export interface Link_ {
   url: string;
   text: string;
 }
+
 export interface CardDisplay_ {
   cardIcon: string;
   expirationDate: string;

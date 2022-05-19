@@ -1,3 +1,15 @@
+#review {
+  /*Size, Position, Display,  Margin, Padding, Border*/
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  border-radius: 15px;
+
+  /* Box-shadow Font, Background, Foreground, Color, Animation, */
+  background-color: #fff;
+}
+
 :host {
   /*Size, Position, Display,  Margin, Padding, Border*/
   display: flex;
@@ -22,6 +34,7 @@
   align-items: center;
   gap: 125px;
   margin-top: 50px;
+  margin-bottom: 100px;
   /* Box-shadow Font, Background, Foreground, Color, Animation, */
 }
 

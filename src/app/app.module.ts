@@ -36,6 +36,7 @@ import { TestPageComponent } from './pages/test-page/test-page.component';
 import { CartTotalPipe } from './pipes/cart-total/cart-total.pipe';
 import { DateFormatterPipe } from './pipes/date-formatter/date-formatter.pipe';
 
+
 @NgModule({
   declarations: [
     AppComponent,

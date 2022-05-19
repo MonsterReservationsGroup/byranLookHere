@@ -54,7 +54,6 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
 
   drawStart(event: MouseEvent | Touch) {
     // will be notified of szimek/signature_pad's onBegin event
-    console.log('Start drawing', event);
   }
 
   ngAfterViewInit() {

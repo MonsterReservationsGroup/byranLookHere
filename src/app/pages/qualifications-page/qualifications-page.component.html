@@ -35,10 +35,14 @@
     label="Income"
   ></rafa-input>
   <div class="numberPickers">
-    <rafa-number-picker
-      formControlName="adults"
-      label="Adults"
-    ></rafa-number-picker>
+    <rafa-number-picker formControlName="adults" label="Adults">
+      <p
+        *ngIf="form.get('adults')?.invalid && form.get('adults')?.touched"
+        class="error"
+      >
+        You must have atleast {{minAdults}} Adult(s)
+      </p>
+    </rafa-number-picker>
     <rafa-number-picker
       formControlName="children"
       label="Children"
@@ -49,5 +53,8 @@
     [label]="control"
     [formControlName]="control"
   ></rafa-input>
+  <button (click)="scrollToTop()" class="bottom-next-button" rafaButton>
+    Back to top!
+  </button>
   <!-- <rafa-calendar label="Date of Birth"></rafa-calendar> -->
 </form>

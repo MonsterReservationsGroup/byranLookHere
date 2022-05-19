@@ -8,7 +8,36 @@
   <rafa-credit-card-panel
     (onAddCard)="saveCard($event)"
   ></rafa-credit-card-panel>
-  <p>Please sign below to confirm your reservation.</p>
+  <div class="termsAndConditions">
+    <h1 class="termsAndConditions__header">Terms and Conditions</h1>
+
+    <p class="termsAndConditions__body">
+      [[Dynamic Qualifications Field from CRM]] Resort fees & taxes will be
+      collected by the resort at time of check-in.<br /><br />
+      A valid driver's license and major credit card must be presented at time
+      of check-in and VIP preview registration for identification verification.
+      A maximum of one (1) tour per every twelve (12) month period is allowed. A
+      purchase of 'White Glove Service' allots one (1) 'free' reschedule for use
+      up to [[Dynamic Cancellation Period from CRM]] days prior to arrival date
+      and is exempt from rescheduling fees. <br /><br />
+      Please note: without at least [[Dynamic Cancellation Period from CRM]]
+      days' notice and a purchase of 'White Glove Service', our strict
+      cancellation/reschedule policy will apply and a fee ranging from $150 -
+      $800 will be due.<br /><br />
+      <span class="termsAndConditions__bold"> Both parties </span>of a married,
+      cohabitating and/or engaged couple must attend the full one hundred and
+      twenty (120) minute sales presentation. All presentation attendees must be
+      either a Canadian or United States citizen and fluent in spoken English as
+      translators are not available. This offer is not valid for group travel
+      (more than one party traveling to the same destination with the same
+      itinerary).<br /><br />
+      Please be on the lookout for your confirmation letter over the next 72
+      business hours once your reservation has been confirmed by the resort with
+      the full details of participation!
+      <br /><br />
+      Please sign below to confirm your reservation.
+    </p>
+  </div>
   <signature-pad
     #signature
     [options]="signaturePadOptions"

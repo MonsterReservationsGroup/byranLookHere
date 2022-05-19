@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as interfaces from '../../../../interfaces.d';
 import * as services from '../../services';
+import { FormService } from '../form.service';
 services.fixNeverReadError(interfaces);
 
 /*****Description*****
@@ -33,6 +34,11 @@ export class StateService {
   private _originalGuest = null as any;
   private _signature = null as any;
   private _textToDeveloper = null as any;
+  private _selectedRoom = null as any;
+
+  get selectedRoom() {
+    return this._selectedRoom;
+  }
 
   set textToDeveloper(text: string) {
     this._textToDeveloper = text;
@@ -47,11 +53,10 @@ export class StateService {
   }
 
   get signature() {
-    console.log(this._signature);
     return this._signature;
   }
 
-  constructor() {}
+  constructor(private form: FormService) {}
 
   set originalGuest(guest: any) {
     this._originalGuest = guest;
@@ -105,6 +110,7 @@ export class StateService {
   }
 
   set selectedDate(date: any) {
+    console.log({ dateChange: date });
     this._selectedDate = date;
   }
 
@@ -137,9 +143,44 @@ export class StateService {
       name: 'White Glove Service',
       price: 99,
     };
+    console.log({ selectedDateCart: this.selectedDate });
+    const options = this.selectedDate.availableRoomTypes.filter((rt: any) => {
+      const partySize = this.guest.numInParty;
+      const capacity = rt.ideaCapacity;
+      const isOver = partySize > capacity;
+      return !isOver;
+    });
+    const capacityArr = options.map((o: any) => o.ideaCapacity);
+    const min = Math.max(capacityArr);
+    const max = Math.max(capacityArr);
+    const formValues = Object.keys(this.form.formValues).filter((v) => {
+      const isNumber = typeof v === 'number';
+      if (isNumber) {
+        return v < 200;
+      }
+      return false;
+    });
+    const maxChildAge = Math.max(formValues as any);
+    //@ts-ignore
+    const useMax = this.guest.adults > 2 || maxChildAge > 12;
+    const capacity = useMax ? max : min;
+    this._selectedRoom = options.find((d: any) => {
+      d.idealCapacity = capacity;
+    });
+    console.log({
+      selectedRoom: this._selectedRoom,
+      useMax,
+      capacity,
+      min,
+      max,
+      capacityArr,
+      options,
+      formValues,
+    });
+
     const destination: interfaces.CartItem_ = {
       id: '2',
-      description: `The $150 refundable deposit ensures your accomodations are secured. Check-in Date: ${new Date(
+      description: `The $150 refundable deposit ensures your accomodations are secured. You will recieve the deposit back in the form of a visa card. Check-in Date: ${new Date(
         this.selectedDate.milliDate
       )?.toLocaleDateString()}. Nights: 3`,
       icon: '../../../assets/cart/vacations.svg',
@@ -157,10 +198,7 @@ export class StateService {
   }
 
   removeFromCart(id: string) {
-    console.log(id);
     this._cart = this.cart.map((item) => {
-      console.log(item);
-      console.log(id);
       if (item.id === id) {
         item.isRemoved = true;
       }
